@@ -2909,3 +2909,234 @@ Name | Type | Description
 --------- | ------- | -----------
 2023-11|	string	|Return percentage for November 2023.
 2023-12|	string|	Return percentage for December 2023.
+
+
+
+
+
+# DEX APIs
+This document outlines the APIs used to fetch quotes and place orders for token swaps on decentralized exchanges (DEX). The supported algorithm type is SWAP, and the response contains information on the price and slippage.
+
+## place_order_pre_processing_dex
+
+This API is used to fetch token swap quotes for a given trading pair.
+
+### Request
+
+| Parameter               | Type     | Description                                                                                                                                                                       |
+|-------------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|                                                                                                  |
+| `method`                | String   | Name of the method to invoke. In this case, `place_order_pre_processing_dex` or `place_market_orders`.                                                                             |
+| `params.pair`           | String   | Trading pair (e.g., "USDC/SOL"), specifying the assets involved in the trade.                                                                                                     |
+| `params.side`           | String   | The side of the order: "BUY" or "SELL".                                                                                                                                           |
+| `params.amount`         | Number   | The amount of the base currency to trade.                                                                                                                                         |
+| `params.exchange_ids`   | Array    | List of exchange identifiers where the order is placed (e.g., `"dex-bnb.admin"`).                                                                                                 |
+| `params.type`           | String   | The type of trade: "SPOT"                                                                                                              |
+| `params.unit`           | String   | Denomination of the base amount, e.g., "USDC".                                                                                                                                    |
+| `params.slippage`       | Number   | Maximum allowed slippage percentage                                                                                                                 |
+| `params.algo_type`      | String   | Type of algorithm used for the trade. In this case, "SWAP" for decentralized swaps.                                                                                               |
+| `params.price`          | Number   | Price limit for the trade (set to 0 for swap orders).                                                                                                                    |
+
+```json
+{
+    "id": "595d4d5a-fb97-4577-9a0d-edcee13a5e5e",
+    "jsonrpc": "2.0",
+    "method": "place_order_pre_processing_dex",
+    "params": {
+        "pair": "USDC/SOL",
+        "side": "SELL",
+        "amount": 1,
+        "exchange_ids": [
+            "dex-bnb.admin"
+        ],
+        "type": "SPOT",
+        "unit": "USDC",
+        "slippage": 1,
+        "algo_type": "SWAP",
+        "price": 0
+    }
+}
+```
+
+### Response
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": "595d4d5a-fb97-4577-9a0d-edcee13a5e5e",
+    "result": {
+        "base_amount": 1.0,
+        "quote_amount": 0.006358516993544726,
+        "usd_amount": 1.00008225440979,
+        "usd_base_amount": 1.00008225440979,
+        "usd_quote_amount": 0.9864042430477954,
+        "contract_amount": "1.0000",
+        "conversion_price_source": "yahoo finance",
+        "plan": [
+            {
+                "exchange": "BNB",
+                "exchange_id": "dex-bnb.admin",
+                "step_price": null,
+                "step_volume": null,
+                "path": [
+                    "USDC",
+                    100,
+                    "PANCAKESWAP_V3",
+                    "WBNB",
+                    500,
+                    "PANCAKESWAP_V3",
+                    "USDT",
+                    10000,
+                    "UNISWAP_V3",
+                    "SOL"
+                ],
+                "base_amount": 0.1,
+                "quote_amount": 0.0006374346561208406,
+                "gas_amount": 0.0,
+                "gas_unit": "BNB",
+                "percent": 10,
+                "allAmounts": [
+                    "100000000000000000",
+                    "170782042952549",
+                    "100024146180649151",
+                    "643809002682049"
+                ],
+                "tokenPathAddresses": [
+                    "0X8AC76A51CC950D9822D68B83FE1AD97B32CD580D",
+                    100,
+                    "PANCAKESWAP_V3",
+                    "0XBB4CDB9CBD36B01BD1CBAEBF2DE08D9173BC095C",
+                    500,
+                    "PANCAKESWAP_V3",
+                    "0X55D398326F99059FF775485246999027B3197955",
+                    10000,
+                    "UNISWAP_V3",
+                    "0X570A5D26F7765ECB712C0924E4DE545B89FD43DF"
+                ],
+                "slippage": "1.0000",
+                "volume": "0.1000",
+                "price": "0.0064",
+                "unit": "USDC",
+                "unit_volume": "0.1000",
+                "transaction_amount": "0.1000",
+                "transaction_unit": "USDC",
+                "base": {
+                    "unit": "USDC",
+                    "volume": 0.1
+                },
+                "quote": {
+                    "unit": "SOL",
+                    "volume": 0.0006374346561208406
+                },
+                "usd_volume": "0.1000"
+            },
+            // More plan items here...
+        ],
+        "total_volume": "1.0000"
+    }
+}
+```
+
+---
+
+## Place Orders
+
+This API is used to place market orders for a token swap, using the quotes fetched in the previous step.
+
+### Request
+
+```json
+{
+  "id": "c44b40c2-b0fe-4cb5-9097-55d0873d2c86",
+  "jsonrpc": "2.0",
+  "method": "place_market_orders",
+  "params": {
+    "orders": [
+      {
+        "pair": "SOL/USDC",
+        "side": "BUY",
+        "volume": "0.007",
+        "price": 0,
+        "exchange": "dex-bnb.admin",
+        "end_time": "2024-06-24T10:39:25.341Z",
+        "start_time": "2024-06-24T09:39:39.484Z",
+        "timezone": "Asia/Calcutta",
+        "timestamp": 1719221974802,
+        "params": {
+          "slippage": 1,
+          "plan": {
+            "exchange": "BNB",
+            "exchange_id": "dex-bnb.admin",
+            "step_price": null,
+            "step_volume": null,
+            "path": [
+              "USDC",
+              100,
+              "PANCAKESWAP_V3",
+              "WBNB",
+              500,
+              "PANCAKESWAP_V3",
+              "USDT",
+              10000,
+              "UNISWAP_V3",
+              "SOL"
+            ],
+            "base_amount": 0.1,
+            "quote_amount": 0.0006374346561208406,
+            "gas_amount": 0,
+            "gas_unit": "BNB",
+            "percent": 10,
+            "allAmounts": [
+              "100000000000000000",
+              "170782042952549",
+              "100024146180649151",
+              "643809002682049"
+            ],
+            "tokenPathAddresses": [
+              "0X8AC76A51CC950D9822D68B83FE1AD97B32CD580D",
+              100,
+              "PANCAKESWAP_V3",
+              "0XBB4CDB9CBD36B01BD1CBAEBF2DE08D9173BC095C",
+              500,
+              "PANCAKESWAP_V3",
+              "0X55D398326F99059FF775485246999027B3197955",
+              10000,
+              "UNISWAP_V3",
+              "0X570A5D26F7765ECB712C0924E4DE545B89FD43DF"
+            ],
+            "slippage": "1.0000",
+            "volume": "0.1000",
+            "price": "0.0064",
+            "unit": "USDC",
+            "unit_volume": "0.1000",
+            "transaction_amount": "0.1000",
+            "transaction_unit": "USDC",
+            "base": {
+              "unit": "USDC",
+              "volume": 0.1
+            },
+            "quote": {
+              "unit": "SOL",
+              "volume": 0.0006374346561208406
+            },
+            "usd_volume": "0.1000"
+          }
+        }
+      }
+      // Add more orders here...
+    ]
+  }
+}
+```
+
+### Response
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": "c44b40c2-b0fe-4cb5-9097-55d0873d2c86",
+  "result": {
+    "success": true,
+    "message": "Orders successfully placed"
+  }
+}
+```
