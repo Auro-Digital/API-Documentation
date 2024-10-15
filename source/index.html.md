@@ -2922,19 +2922,20 @@ This document outlines the APIs used to fetch quotes and place orders for token 
 This API is used to fetch token swap quotes for a given trading pair.
 
 ### Request
-
-| Parameter               | Type     | Description                                                                                                                                                                       |
-|-------------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|                                                                                                  |
-| `method`                | String   | Name of the method to invoke. In this case, `place_order_pre_processing_dex` or `place_market_orders`.                                                                             |
-| `params.pair`           | String   | Trading pair (e.g., "USDC/SOL"), specifying the assets involved in the trade.                                                                                                     |
-| `params.side`           | String   | The side of the order: "BUY" or "SELL".                                                                                                                                           |
-| `params.amount`         | Number   | The amount of the base currency to trade.                                                                                                                                         |
-| `params.exchange_ids`   | Array    | List of exchange identifiers where the order is placed (e.g., `"dex-bnb.admin"`).                                                                                                 |
-| `params.type`           | String   | The type of trade: "SPOT"                                                                                                              |
-| `params.unit`           | String   | Denomination of the base amount, e.g., "USDC".                                                                                                                                    |
-| `params.slippage`       | Number   | Maximum allowed slippage percentage                                                                                                                 |
-| `params.algo_type`      | String   | Type of algorithm used for the trade. In this case, "SWAP" for decentralized swaps.                                                                                               |
-| `params.price`          | Number   | Price limit for the trade (set to 0 for swap orders).                                                                                                                    |
+| Name   | Type   | Description |
+--------|--------|-------------
+|jsonrpc | string | Only "2.0" is supported |
+|id      | string | This will be echoed back in responses or subscription payloads|
+|method  | string | Establishing the specific API to connect to. Documented below |
+|params  | string | Details regarding the specific API call. Documented below     |
+|params.pair|string | Trading pair (e.g., "USDC/SOL"), specifying the assets involved in the trade|
+|params.side|string | The side of the order: "BUY" or "SELL"|
+|params.amount| number| The amount of the base currency to trade|
+|params.type| string| The type of trade: "SPOT"|
+|params.unit| string| Denomination of the base amount|
+|params.slippage| number| Maximum allowed slippage percentage                                                                                                                 |
+|params.algo_type| string| Type of algorithm used for the trade. In this case, "SWAP" for decentralized swaps|
+|params.price| number   | Price limit for the trade (set to 0 for swap orders)|
 
 ```json
 {
