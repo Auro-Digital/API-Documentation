@@ -2921,21 +2921,7 @@ This document outlines the APIs used to fetch quotes and place orders for token 
 
 This API is used to fetch token swap quotes for a given trading pair.
 
-### Request
-| Name   | Type   | Description |
---------|--------|-------------
-|jsonrpc | string | Only "2.0" is supported |
-|id      | string | This will be echoed back in responses or subscription payloads|
-|method  | string | Establishing the specific API to connect to. Documented below |
-|params  | string | Details regarding the specific API call. Documented below     |
-|params.pair|string | Trading pair (e.g., "USDC/SOL"), specifying the assets involved in the trade|
-|params.side|string | The side of the order: "BUY" or "SELL"|
-|params.amount| number| The amount of the base currency to trade|
-|params.type| string| The type of trade: "SPOT"|
-|params.unit| string| Denomination of the base amount|
-|params.slippage| number| Maximum allowed slippage percentage                                                                                                                 |
-|params.algo_type| string| Type of algorithm used for the trade. In this case, "SWAP" for decentralized swaps|
-|params.price| number   | Price limit for the trade (set to 0 for swap orders)|
+
 
 ```json
 {
@@ -2957,6 +2943,22 @@ This API is used to fetch token swap quotes for a given trading pair.
     }
 }
 ```
+### Request
+
+| Name   | Type   | Description |
+--------|--------|-------------
+|jsonrpc | string | Only "2.0" is supported |
+|id      | string | This will be echoed back in responses or subscription payloads|
+|method  | string | Establishing the specific API to connect to. Documented below |
+|params  | string | Details regarding the specific API call. Documented below     |
+|params.pair|string | Trading pair (e.g., "USDC/SOL"), specifying the assets involved in the trade|
+|params.side|string | The side of the order: "BUY" or "SELL"|
+|params.amount| number| The amount of the base currency to trade|
+|params.type| string| The type of trade: "SPOT"|
+|params.unit| string| Denomination of the base amount|
+|params.slippage| number| Maximum allowed slippage percentage                                                                                                                 |
+|params.algo_type| string| Type of algorithm used for the trade. In this case, "SWAP" for decentralized swaps|
+|params.price| number   | Price limit for the trade (set to 0 for swap orders)|
 
 ### Response
 
@@ -3036,6 +3038,35 @@ This API is used to fetch token swap quotes for a given trading pair.
     }
 }
 ```
+
+| Name                         | Type    | Description                                                                                                     |
+|------------------------------|---------|-----------------------------------------------------------------------------------------------------------------|
+| jsonrpc                      | string  | The JSON-RPC version, typically "2.0".                                                                         |
+| id                           | string  | The ID from the request, echoed back in the response.                                                           |
+| result                       | object  | Contains the results of the fetch quotes operation.                                                             |
+| result.base_amount           | number  | The base amount specified for the quote.                                                                        |
+| result.quote_amount          | number  | The amount of the quote currency corresponding to the base amount.                                              |
+| result.usd_amount            | number  | The equivalent amount in USD for the base amount.                                                               |
+| result.usd_base_amount       | number  | The USD equivalent of the base amount.                                                                          |
+| result.usd_quote_amount      | number  | The USD equivalent of the quote amount.                                                                         |
+| result.contract_amount       | string  | The amount as formatted for the contract, typically shown with fixed decimal places.                           |
+| result.plan                  | array   | An array of execution plans used for placing the order, with details for each step.                            |
+| result.total_volume          | string  | The total volume of the trade represented as a string.                                                         |
+| result.plan[].exchange       | string  | The exchange being used in the step of the execution plan (e.g., "BNB").                                      |
+| result.plan[].exchange_id    | string  | The unique identifier for the exchange used in the step.                                                       |
+| result.plan[].path           | array   | The path of tokens used in the swap, detailing the sequence of exchanges.                                     |
+| result.plan[].base_amount    | number  | The amount of the base currency for this step.                                                                 |
+| result.plan[].quote_amount   | number  | The amount of the quote currency for this step.                                                                |
+| result.plan[].gas_amount     | number  | The amount of gas required for this step.                                                                      |
+| result.plan[].gas_unit       | string  | The unit of gas being used (e.g., "BNB").                                                                     |
+| result.plan[].percent        | number  | The percentage of the total volume allocated to this step.                                                     |
+| result.plan[].allAmounts     | array   | An array of all amounts involved at each step in the plan.                                                    |
+| result.plan[].tokenPathAddresses | array | An array of token addresses in the path of the swap.                                                          |
+| result.plan[].slippage       | string  | The slippage percentage for this step, typically as a string.                                                  |
+| result.plan[].volume         | string  | The volume for the transaction as a string.                                                                    |
+| result.plan[].base           | object  | An object containing base currency details, including unit and volume.                                         |
+| result.plan[].quote          | object  | An object containing quote currency details, including unit and volume.                                        |
+
 
 ---
 
@@ -3129,4 +3160,24 @@ This API is used to place market orders for a token swap, using the quotes fetch
   }
 }
 ```
+| Name                         | Type    | Description                                                                                                     |
+|------------------------------|---------|-----------------------------------------------------------------------------------------------------------------|
+| id                           | string  | A unique identifier for the request.                                                                            |
+| jsonrpc                      | string  | The JSON-RPC version, typically "2.0".                                                                         |
+| method                       | string  | The API method being invoked; in this case, "place_market_orders".                                             |
+| params                       | object  | Contains the parameters for the API method.                                                                     |
+| params.orders                | array   | An array of orders to be placed.                                                                                |
+| params.orders[].pair        | string  | The trading pair for the order (e.g., "SOL/USDC").                                                             |
+| params.orders[].side        | string  | The side of the order: "BUY" or "SELL".                                                                        |
+| params.orders[].volume      | string  | The volume of the base currency to trade as a string.                                                          |
+| params.orders[].price       | number  | The price limit for the order; set to 0 for market orders.                                                    |
+| params.orders[].exchange     | string  | The exchange where the order will be placed (e.g., "dex-bnb.admin").                                          |
+| params.orders[].end_time    | string  | The expiration time for the order in ISO 8601 format.                                                          |
+| params.orders[].start_time   | string  | The start time for the order in ISO 8601 format.                                                              |
+| params.orders[].timezone     | string  | The timezone in which the start and end times are specified (e.g., "Asia/Calcutta").                          |
+| params.orders[].timestamp    | number  | The timestamp of when the order is being placed, in milliseconds since epoch.                                  |
+| params.orders[].params       | object  | Additional parameters for the order, including slippage and plan details.                                       |
+| params.orders[].params.slippage | number  | Maximum allowed slippage percentage for the order.                                                             |
+| params.orders[].params.plan   | object  | Copy-paste the exact plan received in the quotes response here.                                                |
+
 
