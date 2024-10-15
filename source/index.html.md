@@ -267,7 +267,7 @@ get  all active orders
 {
     "jsonrpc": "2.0",
     "id": "c407195b-4c35-483d-93f5-798b391dc710",
-    "method": "subscribe_algo_executions",
+    "method": "get_algo_executions",
     "params": {
         "start_time": "2018-09-07T16:00:00.000Z",
         "end_time": "2020-09-07T16:00:00.000Z",
@@ -448,7 +448,7 @@ result | string | Confirmation of request. “ok“ indicates positive confirmat
 
 
 
-## subscribe_balances
+## get_balances
 
 get  all balances for the given exchanges.
 
@@ -456,7 +456,7 @@ get  all balances for the given exchanges.
 {
     "jsonrpc": "2.0",
     "id": "6c1985bf-80ad-4bbc-86d0-6e682cdb764d",
-    "method": "subscribe_balances",
+    "method": "get_balances",
     "params": {
         "pair": "BTC/USD",
         "exchanges": ["coinbasepro"],
