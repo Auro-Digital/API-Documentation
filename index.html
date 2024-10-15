@@ -430,10 +430,10 @@
             <a href="#dex-apis" class="toc-h1 toc-link" data-title="DEX APIs">DEX APIs</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#place_order_pre_processing_dex" class="toc-h2 toc-link" data-title="place_order_pre_processing_dex">place_order_pre_processing_dex</a>
+                    <a href="#place_order_pre_processing_dex-fetch-quotes" class="toc-h2 toc-link" data-title="place_order_pre_processing_dex (Fetch Quotes)">place_order_pre_processing_dex (Fetch Quotes)</a>
                   </li>
                   <li>
-                    <a href="#place-orders" class="toc-h2 toc-link" data-title="Place Orders">Place Orders</a>
+                    <a href="#place_market_orders-place-orders" class="toc-h2 toc-link" data-title="place_market_orders (Place Orders)">place_market_orders (Place Orders)</a>
                   </li>
               </ul>
           </li>
@@ -4948,7 +4948,7 @@ alpha_mtd   number  Alpha of the strategy compared to Bitcoin (month-to-date).</
 </tbody></table>
 <h1 id='dex-apis'>DEX APIs</h1>
 <p>This document outlines the APIs used to fetch quotes and place orders for token swaps on decentralized exchanges (DEX). The supported algorithm type is SWAP, and the response contains information on the price and slippage.</p>
-<h2 id='place_order_pre_processing_dex'>place_order_pre_processing_dex</h2>
+<h2 id='place_order_pre_processing_dex-fetch-quotes'>place_order_pre_processing_dex (Fetch Quotes)</h2>
 <p>This API is used to fetch token swap quotes for a given trading pair.</p>
 <h3 id='request-29'>Request</h3>
 <table><thead>
@@ -5113,7 +5113,7 @@ alpha_mtd   number  Alpha of the strategy compared to Bitcoin (month-to-date).</
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <hr>
-<h2 id='place-orders'>Place Orders</h2>
+<h2 id='place_market_orders-place-orders'>place_market_orders (Place Orders)</h2>
 <p>This API is used to place market orders for a token swap, using the quotes fetched in the previous step.</p>
 <h3 id='request-30'>Request</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c44b40c2-b0fe-4cb5-9097-55d0873d2c86"</span><span class="p">,</span><span class="w">
@@ -5132,6 +5132,7 @@ alpha_mtd   number  Alpha of the strategy compared to Bitcoin (month-to-date).</
         </span><span class="nl">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Asia/Calcutta"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1719221974802</span><span class="p">,</span><span class="w">
         </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="err">//</span><span class="w"> </span><span class="err">Use</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">exact</span><span class="w"> </span><span class="err">plan</span><span class="w"> </span><span class="err">received</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">quotes</span><span class="w"> </span><span class="err">response</span><span class="w"> </span><span class="err">as</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">plan</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">this</span><span class="w"> </span><span class="err">order</span><span class="w">
           </span><span class="nl">"slippage"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
           </span><span class="nl">"plan"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nl">"exchange"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BNB"</span><span class="p">,</span><span class="w">
@@ -5192,16 +5193,8 @@ alpha_mtd   number  Alpha of the strategy compared to Bitcoin (month-to-date).</
           </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
-      </span><span class="err">//</span><span class="w"> </span><span class="err">Add</span><span class="w"> </span><span class="err">more</span><span class="w"> </span><span class="err">orders</span><span class="w"> </span><span class="err">here...</span><span class="w">
+      </span><span class="err">//</span><span class="w"> </span><span class="err">Add</span><span class="w"> </span><span class="err">more</span><span class="w"> </span><span class="err">orders</span><span class="w"> </span><span class="err">here</span><span class="p">,</span><span class="w"> </span><span class="err">each</span><span class="w"> </span><span class="err">using</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">exact</span><span class="w"> </span><span class="err">plan</span><span class="w"> </span><span class="err">received</span><span class="w"> </span><span class="err">from</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">quotes</span><span class="w"> </span><span class="err">response</span><span class="w">
     </span><span class="p">]</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='response-29'>Response</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c44b40c2-b0fe-4cb5-9097-55d0873d2c86"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Orders successfully placed"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
