@@ -426,6 +426,17 @@
                   </li>
               </ul>
           </li>
+          <li>
+            <a href="#dex-apis" class="toc-h1 toc-link" data-title="DEX APIs">DEX APIs</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#place_order_pre_processing_dex" class="toc-h2 toc-link" data-title="place_order_pre_processing_dex">place_order_pre_processing_dex</a>
+                  </li>
+                  <li>
+                    <a href="#place-orders" class="toc-h2 toc-link" data-title="Place Orders">Place Orders</a>
+                  </li>
+              </ul>
+          </li>
       </ul>
     </div>
     <div class="page-wrapper">
@@ -4935,7 +4946,255 @@ alpha_mtd   number  Alpha of the strategy compared to Bitcoin (month-to-date).</
 <td>Return percentage for December 2023.</td>
 </tr>
 </tbody></table>
-
+<h1 id='dex-apis'>DEX APIs</h1>
+<p>This document outlines the APIs used to fetch quotes and place orders for token swaps on decentralized exchanges (DEX). The supported algorithm type is SWAP, and the response contains information on the price and slippage.</p>
+<h2 id='place_order_pre_processing_dex'>place_order_pre_processing_dex</h2>
+<p>This API is used to fetch token swap quotes for a given trading pair.</p>
+<h3 id='request-29'>Request</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>method</code></td>
+<td>String</td>
+<td>Name of the method to invoke. In this case, <code>place_order_pre_processing_dex</code> or <code>place_market_orders</code>.</td>
+</tr>
+<tr>
+<td><code>params.pair</code></td>
+<td>String</td>
+<td>Trading pair (e.g., &quot;USDC/SOL&quot;), specifying the assets involved in the trade.</td>
+</tr>
+<tr>
+<td><code>params.side</code></td>
+<td>String</td>
+<td>The side of the order: &quot;BUY&quot; or &quot;SELL&quot;.</td>
+</tr>
+<tr>
+<td><code>params.amount</code></td>
+<td>Number</td>
+<td>The amount of the base currency to trade.</td>
+</tr>
+<tr>
+<td><code>params.exchange_ids</code></td>
+<td>Array</td>
+<td>List of exchange identifiers where the order is placed (e.g., <code>&quot;dex-bnb.admin&quot;</code>).</td>
+</tr>
+<tr>
+<td><code>params.type</code></td>
+<td>String</td>
+<td>The type of trade: &quot;SPOT&quot;</td>
+</tr>
+<tr>
+<td><code>params.unit</code></td>
+<td>String</td>
+<td>Denomination of the base amount, e.g., &quot;USDC&quot;.</td>
+</tr>
+<tr>
+<td><code>params.slippage</code></td>
+<td>Number</td>
+<td>Maximum allowed slippage percentage</td>
+</tr>
+<tr>
+<td><code>params.algo_type</code></td>
+<td>String</td>
+<td>Type of algorithm used for the trade. In this case, &quot;SWAP&quot; for decentralized swaps.</td>
+</tr>
+<tr>
+<td><code>params.price</code></td>
+<td>Number</td>
+<td>Price limit for the trade (set to 0 for swap orders).</td>
+</tr>
+</tbody></table>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"595d4d5a-fb97-4577-9a0d-edcee13a5e5e"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"place_order_pre_processing_dex"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"pair"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDC/SOL"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELL"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"exchange_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"dex-bnb.admin"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SPOT"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDC"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"slippage"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"algo_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SWAP"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='response-28'>Response</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"595d4d5a-fb97-4577-9a0d-edcee13a5e5e"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"base_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"quote_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.006358516993544726</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"usd_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.00008225440979</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"usd_base_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.00008225440979</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"usd_quote_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.9864042430477954</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"contract_amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0000"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"conversion_price_source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yahoo finance"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"plan"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"exchange"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BNB"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"exchange_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dex-bnb.admin"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"step_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"step_volume"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"path"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"USDC"</span><span class="p">,</span><span class="w">
+                    </span><span class="mi">100</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"PANCAKESWAP_V3"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"WBNB"</span><span class="p">,</span><span class="w">
+                    </span><span class="mi">500</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"PANCAKESWAP_V3"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+                    </span><span class="mi">10000</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"UNISWAP_V3"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"SOL"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="nl">"base_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"quote_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0006374346561208406</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"gas_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"gas_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BNB"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"percent"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"allAmounts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"100000000000000000"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"170782042952549"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"100024146180649151"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"643809002682049"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="nl">"tokenPathAddresses"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"0X8AC76A51CC950D9822D68B83FE1AD97B32CD580D"</span><span class="p">,</span><span class="w">
+                    </span><span class="mi">100</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"PANCAKESWAP_V3"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"0XBB4CDB9CBD36B01BD1CBAEBF2DE08D9173BC095C"</span><span class="p">,</span><span class="w">
+                    </span><span class="mi">500</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"PANCAKESWAP_V3"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"0X55D398326F99059FF775485246999027B3197955"</span><span class="p">,</span><span class="w">
+                    </span><span class="mi">10000</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"UNISWAP_V3"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"0X570A5D26F7765ECB712C0924E4DE545B89FD43DF"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="nl">"slippage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0000"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1000"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0064"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDC"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"unit_volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1000"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"transaction_amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1000"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"transaction_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDC"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"base"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDC"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"volume"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="nl">"quote"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"volume"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0006374346561208406</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="nl">"usd_volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1000"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="err">//</span><span class="w"> </span><span class="err">More</span><span class="w"> </span><span class="err">plan</span><span class="w"> </span><span class="err">items</span><span class="w"> </span><span class="err">here...</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"total_volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0000"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<hr>
+<h2 id='place-orders'>Place Orders</h2>
+<p>This API is used to place market orders for a token swap, using the quotes fetched in the previous step.</p>
+<h3 id='request-30'>Request</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c44b40c2-b0fe-4cb5-9097-55d0873d2c86"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"place_market_orders"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"orders"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"pair"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL/USDC"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.007"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"exchange"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dex-bnb.admin"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-06-24T10:39:25.341Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-06-24T09:39:39.484Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Asia/Calcutta"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1719221974802</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"slippage"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"plan"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"exchange"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BNB"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"exchange_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dex-bnb.admin"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"step_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"step_volume"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"path"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+              </span><span class="s2">"USDC"</span><span class="p">,</span><span class="w">
+              </span><span class="mi">100</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"PANCAKESWAP_V3"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"WBNB"</span><span class="p">,</span><span class="w">
+              </span><span class="mi">500</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"PANCAKESWAP_V3"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+              </span><span class="mi">10000</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"UNISWAP_V3"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"SOL"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nl">"base_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"quote_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0006374346561208406</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"gas_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"gas_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BNB"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"percent"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"allAmounts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+              </span><span class="s2">"100000000000000000"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"170782042952549"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"100024146180649151"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"643809002682049"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nl">"tokenPathAddresses"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+              </span><span class="s2">"0X8AC76A51CC950D9822D68B83FE1AD97B32CD580D"</span><span class="p">,</span><span class="w">
+              </span><span class="mi">100</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"PANCAKESWAP_V3"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"0XBB4CDB9CBD36B01BD1CBAEBF2DE08D9173BC095C"</span><span class="p">,</span><span class="w">
+              </span><span class="mi">500</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"PANCAKESWAP_V3"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"0X55D398326F99059FF775485246999027B3197955"</span><span class="p">,</span><span class="w">
+              </span><span class="mi">10000</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"UNISWAP_V3"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"0X570A5D26F7765ECB712C0924E4DE545B89FD43DF"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nl">"slippage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0000"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1000"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0064"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDC"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"unit_volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1000"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"transaction_amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1000"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"transaction_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDC"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"base"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDC"</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"volume"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nl">"quote"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL"</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"volume"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0006374346561208406</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nl">"usd_volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1000"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+      </span><span class="err">//</span><span class="w"> </span><span class="err">Add</span><span class="w"> </span><span class="err">more</span><span class="w"> </span><span class="err">orders</span><span class="w"> </span><span class="err">here...</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='response-29'>Response</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c44b40c2-b0fe-4cb5-9097-55d0873d2c86"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Orders successfully placed"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
       </div>
       <div class="dark-box">
       </div>
