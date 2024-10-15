@@ -2917,7 +2917,7 @@ Name | Type | Description
 # DEX APIs
 This document outlines the APIs used to fetch quotes and place orders for token swaps on decentralized exchanges (DEX). The supported algorithm type is SWAP, and the response contains information on the price and slippage.
 
-## place_order_pre_processing_dex
+## place_order_pre_processing_dex (Fetch Quotes)
 
 This API is used to fetch token swap quotes for a given trading pair.
 
@@ -3039,7 +3039,7 @@ This API is used to fetch token swap quotes for a given trading pair.
 
 ---
 
-## Place Orders
+## place_market_orders (Place Orders)
 
 This API is used to place market orders for a token swap, using the quotes fetched in the previous step.
 
@@ -3063,6 +3063,7 @@ This API is used to place market orders for a token swap, using the quotes fetch
         "timezone": "Asia/Calcutta",
         "timestamp": 1719221974802,
         "params": {
+          // Use the exact plan received in the quotes response as the plan for this order
           "slippage": 1,
           "plan": {
             "exchange": "BNB",
@@ -3123,21 +3124,9 @@ This API is used to place market orders for a token swap, using the quotes fetch
           }
         }
       }
-      // Add more orders here...
+      // Add more orders here, each using the exact plan received from the quotes response
     ]
   }
 }
 ```
 
-### Response
-
-```json
-{
-  "jsonrpc": "2.0",
-  "id": "c44b40c2-b0fe-4cb5-9097-55d0873d2c86",
-  "result": {
-    "success": true,
-    "message": "Orders successfully placed"
-  }
-}
-```
