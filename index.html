@@ -4950,7 +4950,25 @@ alpha_mtd   number  Alpha of the strategy compared to Bitcoin (month-to-date).</
 <p>This document outlines the APIs used to fetch quotes and place orders for token swaps on decentralized exchanges (DEX). The supported algorithm type is SWAP, and the response contains information on the price and slippage.</p>
 <h2 id='place_order_pre_processing_dex-fetch-quotes'>place_order_pre_processing_dex (Fetch Quotes)</h2>
 <p>This API is used to fetch token swap quotes for a given trading pair.</p>
-<h3 id='request-29'>Request</h3>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"595d4d5a-fb97-4577-9a0d-edcee13a5e5e"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"place_order_pre_processing_dex"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"pair"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDC/SOL"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELL"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"exchange_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"dex-bnb.admin"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SPOT"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDC"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"slippage"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"algo_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SWAP"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='request-29'>Request</h3>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5019,25 +5037,7 @@ alpha_mtd   number  Alpha of the strategy compared to Bitcoin (month-to-date).</
 <td>Price limit for the trade (set to 0 for swap orders)</td>
 </tr>
 </tbody></table>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"595d4d5a-fb97-4577-9a0d-edcee13a5e5e"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"place_order_pre_processing_dex"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"pair"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDC/SOL"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELL"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"exchange_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="s2">"dex-bnb.admin"</span><span class="w">
-        </span><span class="p">],</span><span class="w">
-        </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SPOT"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDC"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"slippage"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"algo_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SWAP"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='response-28'>Response</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+<h3 id='response-28'>Response</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"595d4d5a-fb97-4577-9a0d-edcee13a5e5e"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -5112,6 +5112,140 @@ alpha_mtd   number  Alpha of the strategy compared to Bitcoin (month-to-date).</
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>jsonrpc</td>
+<td>string</td>
+<td>The JSON-RPC version, typically &quot;2.0&quot;.</td>
+</tr>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>The ID from the request, echoed back in the response.</td>
+</tr>
+<tr>
+<td>result</td>
+<td>object</td>
+<td>Contains the results of the fetch quotes operation.</td>
+</tr>
+<tr>
+<td>result.base_amount</td>
+<td>number</td>
+<td>The base amount specified for the quote.</td>
+</tr>
+<tr>
+<td>result.quote_amount</td>
+<td>number</td>
+<td>The amount of the quote currency corresponding to the base amount.</td>
+</tr>
+<tr>
+<td>result.usd_amount</td>
+<td>number</td>
+<td>The equivalent amount in USD for the base amount.</td>
+</tr>
+<tr>
+<td>result.usd_base_amount</td>
+<td>number</td>
+<td>The USD equivalent of the base amount.</td>
+</tr>
+<tr>
+<td>result.usd_quote_amount</td>
+<td>number</td>
+<td>The USD equivalent of the quote amount.</td>
+</tr>
+<tr>
+<td>result.contract_amount</td>
+<td>string</td>
+<td>The amount as formatted for the contract, typically shown with fixed decimal places.</td>
+</tr>
+<tr>
+<td>result.plan</td>
+<td>array</td>
+<td>An array of execution plans used for placing the order, with details for each step.</td>
+</tr>
+<tr>
+<td>result.total_volume</td>
+<td>string</td>
+<td>The total volume of the trade represented as a string.</td>
+</tr>
+<tr>
+<td>result.plan[].exchange</td>
+<td>string</td>
+<td>The exchange being used in the step of the execution plan (e.g., &quot;BNB&quot;).</td>
+</tr>
+<tr>
+<td>result.plan[].exchange_id</td>
+<td>string</td>
+<td>The unique identifier for the exchange used in the step.</td>
+</tr>
+<tr>
+<td>result.plan[].path</td>
+<td>array</td>
+<td>The path of tokens used in the swap, detailing the sequence of exchanges.</td>
+</tr>
+<tr>
+<td>result.plan[].base_amount</td>
+<td>number</td>
+<td>The amount of the base currency for this step.</td>
+</tr>
+<tr>
+<td>result.plan[].quote_amount</td>
+<td>number</td>
+<td>The amount of the quote currency for this step.</td>
+</tr>
+<tr>
+<td>result.plan[].gas_amount</td>
+<td>number</td>
+<td>The amount of gas required for this step.</td>
+</tr>
+<tr>
+<td>result.plan[].gas_unit</td>
+<td>string</td>
+<td>The unit of gas being used (e.g., &quot;BNB&quot;).</td>
+</tr>
+<tr>
+<td>result.plan[].percent</td>
+<td>number</td>
+<td>The percentage of the total volume allocated to this step.</td>
+</tr>
+<tr>
+<td>result.plan[].allAmounts</td>
+<td>array</td>
+<td>An array of all amounts involved at each step in the plan.</td>
+</tr>
+<tr>
+<td>result.plan[].tokenPathAddresses</td>
+<td>array</td>
+<td>An array of token addresses in the path of the swap.</td>
+</tr>
+<tr>
+<td>result.plan[].slippage</td>
+<td>string</td>
+<td>The slippage percentage for this step, typically as a string.</td>
+</tr>
+<tr>
+<td>result.plan[].volume</td>
+<td>string</td>
+<td>The volume for the transaction as a string.</td>
+</tr>
+<tr>
+<td>result.plan[].base</td>
+<td>object</td>
+<td>An object containing base currency details, including unit and volume.</td>
+</tr>
+<tr>
+<td>result.plan[].quote</td>
+<td>object</td>
+<td>An object containing quote currency details, including unit and volume.</td>
+</tr>
+</tbody></table>
+
 <hr>
 <h2 id='place_market_orders-place-orders'>place_market_orders (Place Orders)</h2>
 <p>This API is used to place market orders for a token swap, using the quotes fetched in the previous step.</p>
@@ -5198,6 +5332,100 @@ alpha_mtd   number  Alpha of the strategy compared to Bitcoin (month-to-date).</
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>string</td>
+<td>A unique identifier for the request.</td>
+</tr>
+<tr>
+<td>jsonrpc</td>
+<td>string</td>
+<td>The JSON-RPC version, typically &quot;2.0&quot;.</td>
+</tr>
+<tr>
+<td>method</td>
+<td>string</td>
+<td>The API method being invoked; in this case, &quot;place_market_orders&quot;.</td>
+</tr>
+<tr>
+<td>params</td>
+<td>object</td>
+<td>Contains the parameters for the API method.</td>
+</tr>
+<tr>
+<td>params.orders</td>
+<td>array</td>
+<td>An array of orders to be placed.</td>
+</tr>
+<tr>
+<td>params.orders[].pair</td>
+<td>string</td>
+<td>The trading pair for the order (e.g., &quot;SOL/USDC&quot;).</td>
+</tr>
+<tr>
+<td>params.orders[].side</td>
+<td>string</td>
+<td>The side of the order: &quot;BUY&quot; or &quot;SELL&quot;.</td>
+</tr>
+<tr>
+<td>params.orders[].volume</td>
+<td>string</td>
+<td>The volume of the base currency to trade as a string.</td>
+</tr>
+<tr>
+<td>params.orders[].price</td>
+<td>number</td>
+<td>The price limit for the order; set to 0 for market orders.</td>
+</tr>
+<tr>
+<td>params.orders[].exchange</td>
+<td>string</td>
+<td>The exchange where the order will be placed (e.g., &quot;dex-bnb.admin&quot;).</td>
+</tr>
+<tr>
+<td>params.orders[].end_time</td>
+<td>string</td>
+<td>The expiration time for the order in ISO 8601 format.</td>
+</tr>
+<tr>
+<td>params.orders[].start_time</td>
+<td>string</td>
+<td>The start time for the order in ISO 8601 format.</td>
+</tr>
+<tr>
+<td>params.orders[].timezone</td>
+<td>string</td>
+<td>The timezone in which the start and end times are specified (e.g., &quot;Asia/Calcutta&quot;).</td>
+</tr>
+<tr>
+<td>params.orders[].timestamp</td>
+<td>number</td>
+<td>The timestamp of when the order is being placed, in milliseconds since epoch.</td>
+</tr>
+<tr>
+<td>params.orders[].params</td>
+<td>object</td>
+<td>Additional parameters for the order, including slippage and plan details.</td>
+</tr>
+<tr>
+<td>params.orders[].params.slippage</td>
+<td>number</td>
+<td>Maximum allowed slippage percentage for the order.</td>
+</tr>
+<tr>
+<td>params.orders[].params.plan</td>
+<td>object</td>
+<td>Copy-paste the exact plan received in the quotes response here.</td>
+</tr>
+</tbody></table>
+
       </div>
       <div class="dark-box">
       </div>
