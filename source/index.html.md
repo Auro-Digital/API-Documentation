@@ -26,6 +26,525 @@ The backend service adheres to the same IP whitelist policies as the front-end s
 |method  | string | Establishing the specific API to connect to. Documented below |
 |params  | string | Details regarding the specific API call. Documented below     |
 
+
+# API_GETWAY
+
+## Base URL
+
+Assuming your Auro Digital URL is https://test.aurodigital.ai/, your corresponding WebSocket URL would be: wss://test-backend.aurodigital.ai/v2.
+
+The backend service adheres to the same IP whitelist policies as the front-end service. If you need to add (static) IP addresses to the whitelist, please contact our support team.
+
+## JSON-RPC Schema
+
+
+| Name   | Type   | Description |
+--------|--------|-------------
+|jsonrpc | string | Only "2.0" is supported |
+|id      | string | This will be echoed back in responses or subscription payloads|
+|method  | string | Establishing the specific API to connect to. Documented below |
+|params  | string | Details regarding the specific API call. Documented below     |
+
+## Subscribe_get_pair
+
+Subscribe to a pair. Returns updates on all metrics of that pair on the given exchanges as well as consolidated order books and other metrics across the given exchanges.
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": "6c1985bf-80ad-4bbc-86d0-6e682cdb764d",
+    "method": "subscribe_get_pair",
+    "params": {
+        "pair": "BTC/USD",
+        "exchanges": [
+            "coinbasepro"
+        ]   
+   }
+}
+
+```
+
+### Request
+
+Name | Type | Description
+--------- | ------- | -----------
+pair | string | The normalized symbol.
+exchange | array of object | A list of cryptocurrency exchanges to use.
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": "6c1985bf-80ad-4bbc-86d0-6e682cdb764d",
+    "result": {
+        "pair": "BTC/USD",
+        "exchanges": [
+            "coinbasepro"
+        ],
+        "order_book": {
+            "columns": [
+                "Price",
+                "Size",
+                "Exchange"
+            ],
+            "bids": [
+                [
+                    32800562.00007545,
+                    10897.2,
+                    "coinbasepro"
+                ],
+                [
+                    84791055.49007545,
+                    10897.1938683967,
+                    "coinbasepro"
+                ],
+                [
+                    150392079.09007546,
+                    10897.1878189978,
+                    "coinbasepro"
+                ]
+            ],
+            "asks": [
+                [
+                    32798972.124043528,
+                    10897.22,
+                    "coinbasepro"
+                ],
+                [
+                    84789656.45404352,
+                    10897.2261317227,
+                    "coinbasepro"
+                ],
+                [
+                    150391041.25404352,
+                    10897.2321811358,
+                    "coinbasepro"
+                ]
+            ],
+            "commission": 0.0,
+            "timestamps": {
+                "coinbasepro": 1600246762328
+            },
+            "done_at": [
+                [
+                    "fetch_order_book",
+                    1600246763260
+                ]
+            ],
+            "time_elapsed_after": [
+                [
+                    "fetch_order_book",
+                    {
+                        "coinbasepro": 932
+                    }
+                ]
+            ]
+        },
+        "other_info": [
+            {
+                "title": "Liquidity Metrics",
+                "columns": [
+                    "bid",
+                    "ask",
+                ],
+                "values": [
+                    [
+                        10897.2,
+                        10897.22,
+                    ]
+                ]
+            }
+        ],
+        "is_inverse": false,
+        "time": 1600246763302
+    }
+}
+```
+
+### Response
+
+Name | Type | Description
+--------- | ------- | -----------
+pair | string | The normalized symbol.
+exchange | array of object | A list of cryptocurrency exchanges to use.
+order_book | object | A list of cryptocurrency exchanges to use.
+-- columns | array of string | Description of the format in bids and asks.
+-- bids | array of string or number | Bids aggregated across the specified exchanges.
+-- asks | array of string or number | Asks aggregated across the specified exchanges.
+-- commission | number | The administrator-defined fee that is applied on the order book prices.
+-- timestamps | number | Unix timestamp in milliseconds.
+-- done_at | array of string or number | Internal data structure. Please do not rely on this.
+-- time_elapsed_after | array of string or number | Internal data structure. Please do not rely on this.
+other_info | array of object | Internal data structure. Please do not rely on this.
+is_inverse | boolean | Whether this is an inverse futures contract.
+time | number | The Unix timestamp (in milliseconds) when the data in this payload is fetched.
+
+## get_tickers
+feed of best bid and ask values for a specified crypto pair on the provided Liquidity venue(s).
+
+```json
+{
+"id": "b1b61f11-d34b-408b-ba46-cd6c1907252b",
+"jsonrpc": "2.0",
+"method": "get_tickers",
+"params": {
+
+    "pair": "ETH/BTC",
+    "exchanges": ["okx-new_test"]
+
+    }
+}
+```
+
+### Request
+Name | Type | Description
+--------- | ------- | -----------
+pair | string | The normalized symbol.
+exchange | array of object | A list of cryptocurrency liquidity venue to use.
+
+```json
+{
+"id": "b1b61f11-d34b-408b-ba46-cd6c1907252b",
+"jsonrpc": "2.0",
+    "result": {
+    "best_bid": {
+    "price": 0.06296,
+    "size": 86.378417,
+    "exchange": "okx-new_test",
+    "timestamp": 1691055448
+    },
+"display_name": "okx-new_test"
+    }
+}
+```
+
+### Request
+Name | Type | Description
+--------- | ------- | -----------
+best_bid | Object | Contains the best bid data.(price,size,exchange,timestamps).
+exchange | array of object | A list of cryptocurrency exchanges to use.
+
+
+## get_all_markets
+
+
+Use the get_all_markets method to retrieve a list of all available exchanges and trading symbols. Please note, changes in the availability of symbols on the exchanges may not be immediately reflected in the response, so we recommend calling this method periodically.
+
+
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": "22ad7310-b318-4eee-8618-b3c47ca2f225",
+    "method": "get_all_markets"
+}
+```
+
+### Request
+
+
+
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": "22ad7310-b318-4eee-8618-b3c47ca2f225",
+    "result": [
+        {
+            "type": "SPOT",
+            "normalized_symbol": "BTC/USDT",
+            "exchange_id": "binance",
+            "base": "BTC",
+            "quote": "USDT",
+            "is_inverse": false
+        }
+    ]
+}
+```
+
+### Response
+
+Name | Type | Description
+--------- | ------- | -----------
+type | string | SPOT or FUTURES.
+normalized_symbol | string | The unique identifier for a symbol in Access.
+exchange_id | string | The name of the exchange as configured by your administrator.
+base | string | The base currency.
+quote | string | The quote currency.
+is_inverse | boolean | Whether this is an inverse futures contract.
+
+## get_algo_executions
+
+get to all active orders
+
+
+
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": "c407195b-4c35-483d-93f5-798b391dc710",
+    "method": "subscribe_algo_executions",
+    "params": {
+        "start_time": "2018-09-07T16:00:00.000Z",
+        "end_time": "2020-09-07T16:00:00.000Z",
+        "filters": [
+            {
+                "exchange_id": "coinbasepro",
+                "normalized_symbol": "BTC/USD"
+            }
+        ],
+        "algos_only": false,
+        "status": "ALL"
+    }
+}
+```
+
+### Request
+
+Name | Type | Description
+--------- | ------- | -----------
+start_time	|timestamp	|A list of cryptocurrency exchanges to use.
+end_time|	timestamp|	The amount of the Auro Digital Trading order.
+exchange_id	|string	|The price of the Auro Digital Trading order.
+normalized_symbol	|string|	Start datetime of algo processing
+algo_only|	Boolean|	End datetime of algo processing
+status|	string|	Staus of order that we want("OPEN", "CLOSE", "ALL")
+
+
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": "c407195b-4c35-483d-93f5-798b391dc710",
+    "result": {
+        "executions": [
+            {
+                "id": 7333,
+                "name": null,
+                "algo_type": "LMT",
+                "status": "CLOSED",
+                "data": {
+                    "pair": "BTC/USD",
+                    "side": "sell",
+                    "price": "9150",
+                    "volume": "0.01",
+                    "end_time": "2020-07-16T08:05:52.785000+00:00",
+                    "exchange": "coinbasepro",
+                    "start_time": "2020-07-16T07:06:58.104273+00:00",
+                    "active_order_path": [
+                        "coinbasepro",
+                        "21f1206c-60b6-4323-8d99-233ebbe79c45"
+                    ],
+                    "active_order_amount": "0.01",
+                    "canceled_order_paths": []
+                },
+                "start_time": 1594883218000,
+                "end_time": 1594886752000,
+                "exchanges": [
+                    {
+                        "exchange_id": "coinbasepro",
+                        "side": "sell"
+                    }
+                ],
+                "pairs": [
+                    {
+                        "pair": "BTC/USD",
+                        "side": "sell"
+                    }
+                ],
+                "side": "sell",
+                "price": 9150.0,
+                "price_net": 9150.0,
+                "volume": 0.01,
+                "leg_room": null,
+                "slippage": null,
+                "filled": 0.01,
+                "average": 9156.02,
+                "average_net": 9156.02,
+                "updated_at": 1594883227000
+            }
+        ]
+    }
+}
+
+```
+
+### Response
+
+Name | Type | Description
+--------- | ------- | -----------
+id	|number|	The ID of the Auro Digital Trading order.
+name|	null|	Currently unused field.
+algo_type|	string	|Abbreviated order type.
+status|	string|	Status of the algo execution.
+data|	object|	Internal data structure, please avoid relying on this.
+pair	|string|	The normalized symbol.
+side	|string	|The side of the trade (buy or sell).
+price	|number	|The price of the Auro Digital Trading order.
+volume|	number	|The amount of the Auro Digital Trading order.
+start_time	|timestamp	|Start datetime of algo processing
+end_time	|timestamp	|End datetime of algo processing
+exchange	|string	|The name of the exchange as configured by your administrator.
+active_order_path	|list|	Currently working orders
+active_order_amount	|string	|Amount of those orders
+canceled_order_paths|	list	|Orders canceled by this Algorithm
+start_time|	number	|Unix timestamp in milliseconds.
+end_time|	number or null	|Unix timestamp in milliseconds.
+exchange|	array of object|	A list of cryptocurrency exchanges to use.
+exchange_id	|string	|The name of the exchange as configured by your administrator.
+side|	string	|buy or sell.
+pairs	|array of object|	A list of normalized symbols.
+pair|	string	|buy or sell.
+side|	string	|buy or sell.
+price	|number	|The price of the Auro Digital Trading order.
+price_net|	number or null	|The price, net of a fixed commission (if configured).
+volume|	number	|The amount of the Auro Digital Trading order.
+leg_room|	number or null	|Price adjustment before sending an order to the exchange.
+slippage|	number or null	|Slippage, if applicable.
+filled	|number	|The filled amount of the Auro Digital Trading order.
+average|	number	|The average price of the filled amount.
+average_net	|number or null	|The average price, net of a fixed commission (if configured).
+updated_at|	number	|Unix timestamp in milliseconds.
+
+## place_orders
+
+The place_orders method allows you to place LIMIT orders on an exchange.
+
+A LIMIT order is an order to buy or sell a cryptocurrency at a specific price or better. It allows you to set a precise price at which you want to trade.
+
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": "6c44a8f0-8196-40d0-8f39-620710bae10f",
+  "method": "place_orders",
+  "params": {
+    "orders": [
+      {
+        "pair": "BTC/USD",
+        "side": "BUY",
+        "price": 1234,
+        "volume": 0.01,
+        "exchange": "coinbasepro",
+        "end_time": "2020-09-10T10:44:02.187Z"
+      }
+    ]
+  }
+}
+```
+
+### Request
+
+Name | Type | Description
+--------- | ------- | -----------
+pair	|string	|The trading pair, represented as a normalized symbol
+side|	string	|Indicates whether you want to "buy" or "sell".
+price|	number	|Specifies the price at which you want to execute the order.
+volume	|number	|Represents the amount (in base currency) you want to order.
+exchange|	string	|The identifier of the exchange where the order will be placed, as configured by your administrator.
+end_time	|timestamp	|The time at which the order will expire if not fulfilled.
+
+
+```json
+
+
+
+{
+    "jsonrpc": "2.0",
+    "id": "6c44a8f0-8196-40d0-8f39-620710bae10f",
+    "result": "ok"
+}
+```
+
+### Response
+
+Name | Type | Description
+--------- | ------- | -----------
+result | string | Confirmation of request. “ok“ indicates positive confirmation. <br /> Negative confirmation will display an “error” field instead of “result”
+
+
+
+## subscribe_balances
+
+get to all balances for the given exchanges.
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": "6c1985bf-80ad-4bbc-86d0-6e682cdb764d",
+    "method": "subscribe_balances",
+    "params": {
+        "pair": "BTC/USD",
+        "exchanges": ["coinbasepro"],
+        "from_mid_agg": 0,
+        "cutoff": 1
+    }
+}
+```
+
+### Request
+
+Name | Type | Description
+--------- | ------- | -----------
+pair	|string	|The normalized symbol.
+exchanges|	array of object	|A list of cryptocurrency exchanges to use.
+from_mid_agg|	number	|Filter for Consolidated Orderbooks
+cutoff	|number|	Filter for Consolidated Orderbooks
+
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": "6c1985bf-80ad-4bbc-86d0-6e682cdb764d",
+    "result": {
+        "pair": "BTC/USD",
+        "exchanges": ["coinbasepro"],
+        "balances": {
+            "coinbasepro": {
+                "BTC": {
+                    "free": 215.52433665,
+                    "used": 0,
+                    "total": 215.52433665
+                },
+                "ETH": {
+                    "free": 883.80160773,
+                    "used": 0,
+                    "total": 883.80160773
+                },
+                "USD": {
+                    "free": 363332.4740171202,
+                    "used": 0,
+                    "total": 363332.4740171202
+                },
+                "USDC": {
+                    "free": 70000.0,
+                    "used": 0,
+                    "total": 70000.0
+                }
+            }
+        },
+        "is_inverse": false,
+        "time": 1600246763302
+    }
+}
+```
+
+### Response
+
+Name | Type | Description
+--------- | ------- | -----------
+pair|	string|	The normalized symbol.
+exchanges|	array of object|	A list of cryptocurrency exchanges to use.
+balances|	object|	The balances on the exchanges configured by your administrator.
+exchange_id (as key)|	object	|The name of the exchange as configured by your administrator.
+currency_id (as key)|	object|	The currency ID.
+free	|number	|Money available for trading.
+used	|number	|Money on hold due to e.g., open orders.
+total|	number	|free + used.
+is_inverse|	boolean|	Whether this is an inverse futures contract.
+time|	number	|The Unix timestamp (in milliseconds) when the data in this payload is fetched.
+
+
 # Authentication
 
 After you've established a WebSocket connection, you will need to authenticate before you can call the other methods.
@@ -159,6 +678,11 @@ exchange_id | string | The name of the exchange as configured by your administra
 base | string | The base currency.
 quote | string | The quote currency.
 is_inverse | boolean | Whether this is an inverse futures contract.
+
+
+
+
+
 
 ## subscribe_tickers
 
@@ -1616,6 +2140,9 @@ filled	|number	|The filled amount of the Auro Digital Trading order.
 average|	number	|The average price of the filled amount.
 average_net	|number or null	|The average price, net of a fixed commission (if configured).
 updated_at|	number	|Unix timestamp in milliseconds.
+
+
+
 
 # Accounts
 Accounts allow users to interact with all of the exchange accounts.
