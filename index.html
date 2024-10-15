@@ -4953,60 +4953,70 @@ alpha_mtd   number  Alpha of the strategy compared to Bitcoin (month-to-date).</
 <h3 id='request-29'>Request</h3>
 <table><thead>
 <tr>
-<th>Parameter</th>
+<th>Name</th>
 <th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td><code>method</code></td>
-<td>String</td>
-<td>Name of the method to invoke. In this case, <code>place_order_pre_processing_dex</code> or <code>place_market_orders</code>.</td>
+<td>jsonrpc</td>
+<td>string</td>
+<td>Only &quot;2.0&quot; is supported</td>
 </tr>
 <tr>
-<td><code>params.pair</code></td>
-<td>String</td>
-<td>Trading pair (e.g., &quot;USDC/SOL&quot;), specifying the assets involved in the trade.</td>
+<td>id</td>
+<td>string</td>
+<td>This will be echoed back in responses or subscription payloads</td>
 </tr>
 <tr>
-<td><code>params.side</code></td>
-<td>String</td>
-<td>The side of the order: &quot;BUY&quot; or &quot;SELL&quot;.</td>
+<td>method</td>
+<td>string</td>
+<td>Establishing the specific API to connect to. Documented below</td>
 </tr>
 <tr>
-<td><code>params.amount</code></td>
-<td>Number</td>
-<td>The amount of the base currency to trade.</td>
+<td>params</td>
+<td>string</td>
+<td>Details regarding the specific API call. Documented below</td>
 </tr>
 <tr>
-<td><code>params.exchange_ids</code></td>
-<td>Array</td>
-<td>List of exchange identifiers where the order is placed (e.g., <code>&quot;dex-bnb.admin&quot;</code>).</td>
+<td>params.pair</td>
+<td>string</td>
+<td>Trading pair (e.g., &quot;USDC/SOL&quot;), specifying the assets involved in the trade</td>
 </tr>
 <tr>
-<td><code>params.type</code></td>
-<td>String</td>
+<td>params.side</td>
+<td>string</td>
+<td>The side of the order: &quot;BUY&quot; or &quot;SELL&quot;</td>
+</tr>
+<tr>
+<td>params.amount</td>
+<td>number</td>
+<td>The amount of the base currency to trade</td>
+</tr>
+<tr>
+<td>params.type</td>
+<td>string</td>
 <td>The type of trade: &quot;SPOT&quot;</td>
 </tr>
 <tr>
-<td><code>params.unit</code></td>
-<td>String</td>
-<td>Denomination of the base amount, e.g., &quot;USDC&quot;.</td>
+<td>params.unit</td>
+<td>string</td>
+<td>Denomination of the base amount</td>
 </tr>
 <tr>
-<td><code>params.slippage</code></td>
-<td>Number</td>
+<td>params.slippage</td>
+<td>number</td>
 <td>Maximum allowed slippage percentage</td>
 </tr>
 <tr>
-<td><code>params.algo_type</code></td>
-<td>String</td>
-<td>Type of algorithm used for the trade. In this case, &quot;SWAP&quot; for decentralized swaps.</td>
+<td>params.algo_type</td>
+<td>string</td>
+<td>Type of algorithm used for the trade. In this case, &quot;SWAP&quot; for decentralized swaps</td>
 </tr>
 <tr>
-<td><code>params.price</code></td>
-<td>Number</td>
-<td>Price limit for the trade (set to 0 for swap orders).</td>
+<td>params.price</td>
+<td>number</td>
+<td>Price limit for the trade (set to 0 for swap orders)</td>
 </tr>
 </tbody></table>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
