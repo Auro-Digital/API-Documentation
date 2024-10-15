@@ -12,7 +12,7 @@ Please note, this API was initially designed for internal use, primarily for fro
 
 ## Base URL
 
-Assuming your Auro Digital URL is https://test.aurodigital.ai/, your corresponding WebSocket URL would be: wss://test-backend.aurodigital.ai/v2.
+Assuming your Auro Digital URL is `https://test.aurodigital.ai/`, your corresponding WebSocket URL would be: `wss://test-backend.aurodigital.ai/v2`.
 
 The backend service adheres to the same IP whitelist policies as the front-end service. If you need to add (static) IP addresses to the whitelist, please contact our support team.
 
@@ -543,6 +543,10 @@ This document outlines the APIs used to fetch quotes and place orders for token 
 Assuming your Auro Digital URL is `https://test.aurodigital.ai/`, your corresponding WebSocket URL would be: `wss://test-backend.aurodigital.ai/v1`.
 
 The backend service adheres to the same IP whitelist policies as the front-end service. If you need to add (static) IP addresses to the whitelist, please contact our support team.
+
+
+
+
 
 ## JSON-RPC Schema
 
