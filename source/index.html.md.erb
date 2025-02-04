@@ -3094,27 +3094,24 @@ Partial fill only applies if a swap route consists of multiple main route parts.
 ###Request (Partial Fill Enabled)
 ```json
 {
-    "id": "7bdac2f7-2b23-42db-94f3-d8963156ef74",
+    "id": "508cf9f6-b49f-4d36-a84a-b775570f62f0",
     "jsonrpc": "2.0",
     "method": "place_market_orders",
     "params": {
-        "orders": [
+        "orders": [   // list containing all orders
             {
                 "pair": "ETH/USDC",
                 "side": "SELL",
                 "volume": 1,
                 "price": 0,
                 "exchange": "dex-arbitrum.Test",
-                "start_time": "2025-02-04T06:28:11.128Z",
-                "end_time": "2025-02-04T07:28:11.128Z",
+                "end_time": "2025-02-04T06:36:09.344Z",
+                "start_time": "2025-02-04T05:36:09.344Z",
                 "timezone": "Asia/Calcutta",
-                "timestamp": 1738650536207,
+                "timestamp": 1738647371663,
                 "params": {
-                    "partialFill": false,
-                    "plans": [
-                        { "plan": { ... } },  // Plan 1
-                        { "plan": { ... } }   // Plan 2
-                    ]
+                    "partialFill": true,
+                    "plan": {..} // Taken directly from fetch quotes API
                 }
             }
         ]
