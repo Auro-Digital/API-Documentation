@@ -3083,14 +3083,15 @@ This API is used to place market orders for a token swap, using the quotes fetch
 
 
 ###Execution Strategy
-####Partial Fill Enabled (partialFill: true)
+
+###Partial Fill Enabled (partialFill: true)
 Partial fill only applies if a swap route consists of multiple main route parts. It allows for partial execution, preventing the transaction from being reversed if the market price moves out of favor.
 - The plan is taken directly from the place_order_pre_processing_dex API response without modification.
 - The entire volume is allocated to a single execution plan.
 - If the market changes, only a portion of the trade might be executed.
 
 
-Example Request (Partial Fill Enabled)
+###Request (Partial Fill Enabled)
 ```json
 {
     "id": "7bdac2f7-2b23-42db-94f3-d8963156ef74",
@@ -3121,13 +3122,13 @@ Example Request (Partial Fill Enabled)
 }
 ```
 
-####Partial Fill Disabled (partialFill: false)
+###Partial Fill Disabled (partialFill: false)
 When partial fill is disabled, the entire order must be executed as planned.
 - The execution plan is split into multiple parts.
 - Each plan executes a portion of the trade at a defined percentage.
 - If any part fails, the entire order is canceled.
 
-Example Request (Partial Fill Disabled)
+#Request (Partial Fill Disabled)
 ```json
 {
     "id": "7bdac2f7-2b23-42db-94f3-d8963156ef74",
