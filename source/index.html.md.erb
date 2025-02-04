@@ -541,6 +541,23 @@ time|	number	|The Unix timestamp (in milliseconds) when the data in this payload
 # DEX APIs
 This document outlines the APIs used to fetch quotes and place orders for token swaps on decentralized exchanges (DEX). The supported algorithm type is SWAP, and the response contains information on the price and slippage.
 
+## Base URL
+
+Assuming your Auro Digital URL is https://mtuat.aurodigital.ai/, your corresponding WebSocket URL would be: wss://mtuat-backend.aurodigital.ai/v1.
+
+The backend service adheres to the same IP whitelist policies as the front-end service. If you need to add (static) IP addresses to the whitelist, please contact our support team.
+
+## JSON-RPC Schema
+
+
+| Name   | Type   | Description |
+--------|--------|-------------
+|jsonrpc | string | Only "2.0" is supported |
+|id      | string | This will be echoed back in responses or subscription payloads|
+|method  | string | Establishing the specific API to connect to. Documented below |
+|params  | string | Details regarding the specific API call. Documented below     |
+
+
 ## place_order_pre_processing_dex (Fetch Quotes)
 
 This API is used to fetch token swap quotes for a given trading pair.
