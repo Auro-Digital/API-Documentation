@@ -4956,18 +4956,16 @@ alpha_mtd   number  Alpha of the strategy compared to Bitcoin (month-to-date).</
 <h2 id='place_order_pre_processing_dex-fetch-quotes'>place_order_pre_processing_dex (Fetch Quotes)</h2>
 <p>This API is used to fetch token swap quotes for a given trading pair.</p>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"595d4d5a-fb97-4577-9a0d-edcee13a5e5e"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cd728c5d-b8ca-40ee-a9cf-895a91cf2571"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"place_order_pre_processing_dex"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"pair"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDC/SOL"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"pair"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH/USDC"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELL"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"exchange_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="s2">"dex-bnb.admin"</span><span class="w">
-        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"exchange_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"dex-arbitrum.Test"</span><span class="p">],</span><span class="w">
         </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SPOT"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDC"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"slippage"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
         </span><span class="nl">"algo_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SWAP"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
@@ -5044,76 +5042,74 @@ alpha_mtd   number  Alpha of the strategy compared to Bitcoin (month-to-date).</
 </tbody></table>
 <h3 id='response-28'>Response</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"595d4d5a-fb97-4577-9a0d-edcee13a5e5e"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cd728c5d-b8ca-40ee-a9cf-895a91cf2571"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"total_volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0000"</span><span class="p">,</span><span class="w">
         </span><span class="nl">"base_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"quote_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.006358516993544726</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"usd_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.00008225440979</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"usd_base_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.00008225440979</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"usd_quote_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.9864042430477954</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"contract_amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0000"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"conversion_price_source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yahoo finance"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"quote_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">2669.771179</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"usd_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">3066.624755859375</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"usd_base_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">3066.624755859375</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"usd_quote_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">2669.3294320025893</span><span class="p">,</span><span class="w">
         </span><span class="nl">"plan"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
             </span><span class="p">{</span><span class="w">
-                </span><span class="nl">"exchange"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BNB"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"exchange_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dex-bnb.admin"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"exchange"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Arbitrum"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"exchange_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dex-arbitrum.Test"</span><span class="p">,</span><span class="w">
                 </span><span class="nl">"step_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
                 </span><span class="nl">"step_volume"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"path"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                    </span><span class="s2">"USDC"</span><span class="p">,</span><span class="w">
-                    </span><span class="mi">100</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"PANCAKESWAP_V3"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"WBNB"</span><span class="p">,</span><span class="w">
-                    </span><span class="mi">500</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"PANCAKESWAP_V3"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
-                    </span><span class="mi">10000</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"UNISWAP_V3"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"SOL"</span><span class="w">
-                </span><span class="p">],</span><span class="w">
-                </span><span class="nl">"base_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"quote_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0006374346561208406</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"base_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"quote_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">2669.771179</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"base_amount_usd"</span><span class="p">:</span><span class="w"> </span><span class="mf">2750.2073</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"quote_amount_usd"</span><span class="p">:</span><span class="w"> </span><span class="mf">2669.8470005014833</span><span class="p">,</span><span class="w">
                 </span><span class="nl">"gas_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"gas_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BNB"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"percent"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"allAmounts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                    </span><span class="s2">"100000000000000000"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"170782042952549"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"100024146180649151"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"643809002682049"</span><span class="w">
-                </span><span class="p">],</span><span class="w">
-                </span><span class="nl">"tokenPathAddresses"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                    </span><span class="s2">"0X8AC76A51CC950D9822D68B83FE1AD97B32CD580D"</span><span class="p">,</span><span class="w">
-                    </span><span class="mi">100</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"PANCAKESWAP_V3"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"0XBB4CDB9CBD36B01BD1CBAEBF2DE08D9173BC095C"</span><span class="p">,</span><span class="w">
-                    </span><span class="mi">500</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"PANCAKESWAP_V3"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"0X55D398326F99059FF775485246999027B3197955"</span><span class="p">,</span><span class="w">
-                    </span><span class="mi">10000</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"UNISWAP_V3"</span><span class="p">,</span><span class="w">
-                    </span><span class="s2">"0X570A5D26F7765ECB712C0924E4DE545B89FD43DF"</span><span class="w">
-                </span><span class="p">],</span><span class="w">
+                </span><span class="nl">"gas_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"percent"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
                 </span><span class="nl">"slippage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0000"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1000"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0064"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDC"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"unit_volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1000"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"transaction_amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1000"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"transaction_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDC"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"route_amounts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"1000000000000000000"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"2669771179"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="nl">"route_path_symbol"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"WETH"</span><span class="p">,</span><span class="w">
+                    </span><span class="mi">500</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"UNISWAP_V3"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"USDC"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="nl">"route_path_address"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"0x82aF49447D8a07e3bd95BD0d56f35241523fBab1"</span><span class="p">,</span><span class="w">
+                    </span><span class="mi">500</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"UNISWAP_V3"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"0xaf88d065e77c8cC2239327C5EDb3A432268e5831"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="nl">"amm_configs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="kc">null</span><span class="p">],</span><span class="w">
+                </span><span class="nl">"pool_states"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"0xC6962004f452bE9203591991D15f6b388e09E8D0"</span><span class="p">],</span><span class="w">
+                </span><span class="nl">"token_mints"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="s2">"0x82aF49447D8a07e3bd95BD0d56f35241523fBab1"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"0xaf88d065e77c8cC2239327C5EDb3A432268e5831"</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="nl">"token_vaults"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">],</span><span class="w">
+                </span><span class="nl">"token_programs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="p">],</span><span class="w">
+                </span><span class="nl">"observation_states"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="kc">null</span><span class="p">],</span><span class="w">
+                </span><span class="nl">"remaining_accounts"</span><span class="p">:</span><span class="w"> </span><span class="p">[[]],</span><span class="w">
+                </span><span class="nl">"zero_for_ones"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="kc">true</span><span class="p">],</span><span class="w">
+                </span><span class="nl">"route_dex_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"UNISWAP_V3"</span><span class="p">],</span><span class="w">
+                </span><span class="nl">"total_raw_base_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000000000000000000</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"total_raw_quote_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">2669771179</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0000"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2669.7712"</span><span class="p">,</span><span class="w">
                 </span><span class="nl">"base"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDC"</span><span class="p">,</span><span class="w">
-                    </span><span class="nl">"volume"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1</span><span class="w">
+                    </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"volume"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"volume_usd"</span><span class="p">:</span><span class="w"> </span><span class="mf">2750.2073</span><span class="w">
                 </span><span class="p">},</span><span class="w">
                 </span><span class="nl">"quote"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL"</span><span class="p">,</span><span class="w">
-                    </span><span class="nl">"volume"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0006374346561208406</span><span class="w">
+                    </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDC"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"volume"</span><span class="p">:</span><span class="w"> </span><span class="mf">2669.771179</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"volume_usd"</span><span class="p">:</span><span class="w"> </span><span class="mf">2669.8470005014833</span><span class="w">
                 </span><span class="p">},</span><span class="w">
-                </span><span class="nl">"usd_volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1000"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="err">//</span><span class="w"> </span><span class="err">More</span><span class="w"> </span><span class="err">plan</span><span class="w"> </span><span class="err">items</span><span class="w"> </span><span class="err">here...</span><span class="w">
-        </span><span class="p">],</span><span class="w">
-        </span><span class="nl">"total_volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0000"</span><span class="w">
+                </span><span class="nl">"usd_volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3066.6248"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"gas_amount_usd"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
@@ -5138,6 +5134,11 @@ alpha_mtd   number  Alpha of the strategy compared to Bitcoin (month-to-date).</
 <td>result</td>
 <td>object</td>
 <td>Contains the results of the fetch quotes operation.</td>
+</tr>
+<tr>
+<td>result.total_volume</td>
+<td>string</td>
+<td>The total volume of the trade represented as a string.</td>
 </tr>
 <tr>
 <td>result.base_amount</td>
@@ -5165,178 +5166,16 @@ alpha_mtd   number  Alpha of the strategy compared to Bitcoin (month-to-date).</
 <td>The USD equivalent of the quote amount.</td>
 </tr>
 <tr>
-<td>result.contract_amount</td>
-<td>string</td>
-<td>The amount as formatted for the contract, typically shown with fixed decimal places.</td>
-</tr>
-<tr>
 <td>result.plan</td>
 <td>array</td>
 <td>An array of execution plans used for placing the order, with details for each step.</td>
-</tr>
-<tr>
-<td>result.total_volume</td>
-<td>string</td>
-<td>The total volume of the trade represented as a string.</td>
-</tr>
-<tr>
-<td>result.plan[].exchange</td>
-<td>string</td>
-<td>The exchange being used in the step of the execution plan (e.g., &quot;BNB&quot;).</td>
-</tr>
-<tr>
-<td>result.plan[].exchange_id</td>
-<td>string</td>
-<td>The unique identifier for the exchange used in the step.</td>
-</tr>
-<tr>
-<td>result.plan[].path</td>
-<td>array</td>
-<td>The path of tokens used in the swap, detailing the sequence of exchanges.</td>
-</tr>
-<tr>
-<td>result.plan[].base_amount</td>
-<td>number</td>
-<td>The amount of the base currency for this step.</td>
-</tr>
-<tr>
-<td>result.plan[].quote_amount</td>
-<td>number</td>
-<td>The amount of the quote currency for this step.</td>
-</tr>
-<tr>
-<td>result.plan[].gas_amount</td>
-<td>number</td>
-<td>The amount of gas required for this step.</td>
-</tr>
-<tr>
-<td>result.plan[].gas_unit</td>
-<td>string</td>
-<td>The unit of gas being used (e.g., &quot;BNB&quot;).</td>
-</tr>
-<tr>
-<td>result.plan[].percent</td>
-<td>number</td>
-<td>The percentage of the total volume allocated to this step.</td>
-</tr>
-<tr>
-<td>result.plan[].allAmounts</td>
-<td>array</td>
-<td>An array of all amounts involved at each step in the plan.</td>
-</tr>
-<tr>
-<td>result.plan[].tokenPathAddresses</td>
-<td>array</td>
-<td>An array of token addresses in the path of the swap.</td>
-</tr>
-<tr>
-<td>result.plan[].slippage</td>
-<td>string</td>
-<td>The slippage percentage for this step, typically as a string.</td>
-</tr>
-<tr>
-<td>result.plan[].volume</td>
-<td>string</td>
-<td>The volume for the transaction as a string.</td>
-</tr>
-<tr>
-<td>result.plan[].base</td>
-<td>object</td>
-<td>An object containing base currency details, including unit and volume.</td>
-</tr>
-<tr>
-<td>result.plan[].quote</td>
-<td>object</td>
-<td>An object containing quote currency details, including unit and volume.</td>
 </tr>
 </tbody></table>
 
 <hr>
 <h2 id='place_market_orders-place-orders'>place_market_orders (Place Orders)</h2>
-<p>This API is used to place market orders for a token swap, using the quotes fetched in the previous step.</p>
-<h3 id='request-30'>Request</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c44b40c2-b0fe-4cb5-9097-55d0873d2c86"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"place_market_orders"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"orders"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"pair"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL/USDC"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.007"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"exchange"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dex-bnb.admin"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-06-24T10:39:25.341Z"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2024-06-24T09:39:39.484Z"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Asia/Calcutta"</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1719221974802</span><span class="p">,</span><span class="w">
-        </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="err">//</span><span class="w"> </span><span class="err">Use</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">exact</span><span class="w"> </span><span class="err">plan</span><span class="w"> </span><span class="err">received</span><span class="w"> </span><span class="err">in</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">quotes</span><span class="w"> </span><span class="err">response</span><span class="w"> </span><span class="err">as</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">plan</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">this</span><span class="w"> </span><span class="err">order</span><span class="w">
-          </span><span class="nl">"slippage"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-          </span><span class="nl">"plan"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"exchange"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BNB"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"exchange_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dex-bnb.admin"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"step_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"step_volume"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"path"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-              </span><span class="s2">"USDC"</span><span class="p">,</span><span class="w">
-              </span><span class="mi">100</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"PANCAKESWAP_V3"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"WBNB"</span><span class="p">,</span><span class="w">
-              </span><span class="mi">500</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"PANCAKESWAP_V3"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
-              </span><span class="mi">10000</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"UNISWAP_V3"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"SOL"</span><span class="w">
-            </span><span class="p">],</span><span class="w">
-            </span><span class="nl">"base_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"quote_amount"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0006374346561208406</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"gas_amount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"gas_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BNB"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"percent"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"allAmounts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-              </span><span class="s2">"100000000000000000"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"170782042952549"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"100024146180649151"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"643809002682049"</span><span class="w">
-            </span><span class="p">],</span><span class="w">
-            </span><span class="nl">"tokenPathAddresses"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-              </span><span class="s2">"0X8AC76A51CC950D9822D68B83FE1AD97B32CD580D"</span><span class="p">,</span><span class="w">
-              </span><span class="mi">100</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"PANCAKESWAP_V3"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"0XBB4CDB9CBD36B01BD1CBAEBF2DE08D9173BC095C"</span><span class="p">,</span><span class="w">
-              </span><span class="mi">500</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"PANCAKESWAP_V3"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"0X55D398326F99059FF775485246999027B3197955"</span><span class="p">,</span><span class="w">
-              </span><span class="mi">10000</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"UNISWAP_V3"</span><span class="p">,</span><span class="w">
-              </span><span class="s2">"0X570A5D26F7765ECB712C0924E4DE545B89FD43DF"</span><span class="w">
-            </span><span class="p">],</span><span class="w">
-            </span><span class="nl">"slippage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0000"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1000"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0064"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDC"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"unit_volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1000"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"transaction_amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1000"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"transaction_unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDC"</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"base"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-              </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USDC"</span><span class="p">,</span><span class="w">
-              </span><span class="nl">"volume"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="nl">"quote"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-              </span><span class="nl">"unit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOL"</span><span class="p">,</span><span class="w">
-              </span><span class="nl">"volume"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0006374346561208406</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="nl">"usd_volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.1000"</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-      </span><span class="err">//</span><span class="w"> </span><span class="err">Add</span><span class="w"> </span><span class="err">more</span><span class="w"> </span><span class="err">orders</span><span class="w"> </span><span class="err">here</span><span class="p">,</span><span class="w"> </span><span class="err">each</span><span class="w"> </span><span class="err">using</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">exact</span><span class="w"> </span><span class="err">plan</span><span class="w"> </span><span class="err">received</span><span class="w"> </span><span class="err">from</span><span class="w"> </span><span class="err">the</span><span class="w"> </span><span class="err">quotes</span><span class="w"> </span><span class="err">response</span><span class="w">
-    </span><span class="p">]</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
+<p>This API is used to place market orders for a token swap, using the quotes fetched in the previous step. Orders can either allow partial fill (enabling partial execution in case of liquidity constraints) or require full execution (ensuring the entire order is completed as planned).</p>
+<h3 id='request-30'>Request</h3><h4 id='main-fields'>main fields</h4>
 <table><thead>
 <tr>
 <th>Name</th>
@@ -5347,89 +5186,160 @@ alpha_mtd   number  Alpha of the strategy compared to Bitcoin (month-to-date).</
 <tr>
 <td>id</td>
 <td>string</td>
-<td>A unique identifier for the request.</td>
+<td>Unique identifier for the request.</td>
 </tr>
 <tr>
 <td>jsonrpc</td>
 <td>string</td>
-<td>The JSON-RPC version, typically &quot;2.0&quot;.</td>
+<td>JSON-RPC version, typically &quot;2.0&quot;.</td>
 </tr>
 <tr>
 <td>method</td>
 <td>string</td>
-<td>The API method being invoked; in this case, &quot;place_market_orders&quot;.</td>
+<td>The method name, always &quot;place_market_orders&quot;.</td>
 </tr>
 <tr>
 <td>params</td>
 <td>object</td>
-<td>Contains the parameters for the API method.</td>
-</tr>
-<tr>
-<td>params.orders</td>
-<td>array</td>
-<td>An array of orders to be placed.</td>
-</tr>
-<tr>
-<td>params.orders[].pair</td>
-<td>string</td>
-<td>The trading pair for the order (e.g., &quot;SOL/USDC&quot;).</td>
-</tr>
-<tr>
-<td>params.orders[].side</td>
-<td>string</td>
-<td>The side of the order: &quot;BUY&quot; or &quot;SELL&quot;.</td>
-</tr>
-<tr>
-<td>params.orders[].volume</td>
-<td>string</td>
-<td>The volume of the base currency to trade as a string.</td>
-</tr>
-<tr>
-<td>params.orders[].price</td>
-<td>number</td>
-<td>The price limit for the order; set to 0 for market orders.</td>
-</tr>
-<tr>
-<td>params.orders[].exchange</td>
-<td>string</td>
-<td>The exchange where the order will be placed (e.g., &quot;dex-bnb.admin&quot;).</td>
-</tr>
-<tr>
-<td>params.orders[].end_time</td>
-<td>string</td>
-<td>The expiration time for the order in ISO 8601 format.</td>
-</tr>
-<tr>
-<td>params.orders[].start_time</td>
-<td>string</td>
-<td>The start time for the order in ISO 8601 format.</td>
-</tr>
-<tr>
-<td>params.orders[].timezone</td>
-<td>string</td>
-<td>The timezone in which the start and end times are specified (e.g., &quot;Asia/Calcutta&quot;).</td>
-</tr>
-<tr>
-<td>params.orders[].timestamp</td>
-<td>number</td>
-<td>The timestamp of when the order is being placed, in milliseconds since epoch.</td>
-</tr>
-<tr>
-<td>params.orders[].params</td>
-<td>object</td>
-<td>Additional parameters for the order, including slippage and plan details.</td>
-</tr>
-<tr>
-<td>params.orders[].params.slippage</td>
-<td>number</td>
-<td>Maximum allowed slippage percentage for the order.</td>
-</tr>
-<tr>
-<td>params.orders[].params.plan</td>
-<td>object</td>
-<td>Copy-paste the exact plan received in the quotes response here.</td>
+<td>The parameters for placing market orders.</td>
 </tr>
 </tbody></table>
+<h4 id='params-orders'>params.orders[]</h4>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pair</td>
+<td>string</td>
+<td>The trading pair (e.g., &quot;ETH/USDC&quot;).</td>
+</tr>
+<tr>
+<td>side</td>
+<td>string</td>
+<td>&quot;BUY&quot; or &quot;SELL&quot;.</td>
+</tr>
+<tr>
+<td>volume</td>
+<td>number</td>
+<td>Amount of the base asset being traded.</td>
+</tr>
+<tr>
+<td>price</td>
+<td>number</td>
+<td>Execution price (set to 0 for market orders).</td>
+</tr>
+<tr>
+<td>exchange</td>
+<td>string</td>
+<td>The exchange name where the order will be executed.</td>
+</tr>
+<tr>
+<td>start_time</td>
+<td>string</td>
+<td>Start time of the order (ISO 8601 format).</td>
+</tr>
+<tr>
+<td>end_time</td>
+<td>string</td>
+<td>Expiration time of the order (ISO 8601 format).</td>
+</tr>
+<tr>
+<td>timezone</td>
+<td>string</td>
+<td>The timezone of the order timestamps.</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>number</td>
+<td>Epoch timestamp of when the order was created.</td>
+</tr>
+<tr>
+<td>params</td>
+<td>object</td>
+<td>Object containing order details</td>
+</tr>
+</tbody></table>
+<h3 id='execution-strategy'>Execution Strategy</h3><h4 id='partial-fill-enabled-partialfill-true'>Partial Fill Enabled (partialFill: true)</h4>
+<p>Partial fill only applies if a swap route consists of multiple main route parts. It allows for partial execution, preventing the transaction from being reversed if the market price moves out of favor.
+- The plan is taken directly from the place_order_pre_processing_dex API response without modification.
+- The entire volume is allocated to a single execution plan.
+- If the market changes, only a portion of the trade might be executed.</p>
+
+<p>Example Request (Partial Fill Enabled)
+<code>json
+{
+    &quot;id&quot;: &quot;7bdac2f7-2b23-42db-94f3-d8963156ef74&quot;,
+    &quot;jsonrpc&quot;: &quot;2.0&quot;,
+    &quot;method&quot;: &quot;place_market_orders&quot;,
+    &quot;params&quot;: {
+        &quot;orders&quot;: [
+            {
+                &quot;pair&quot;: &quot;ETH/USDC&quot;,
+                &quot;side&quot;: &quot;SELL&quot;,
+                &quot;volume&quot;: 1,
+                &quot;price&quot;: 0,
+                &quot;exchange&quot;: &quot;dex-arbitrum.Test&quot;,
+                &quot;start_time&quot;: &quot;2025-02-04T06:28:11.128Z&quot;,
+                &quot;end_time&quot;: &quot;2025-02-04T07:28:11.128Z&quot;,
+                &quot;timezone&quot;: &quot;Asia/Calcutta&quot;,
+                &quot;timestamp&quot;: 1738650536207,
+                &quot;params&quot;: {
+                    &quot;partialFill&quot;: false,
+                    &quot;plans&quot;: [
+                        { &quot;plan&quot;: { ... } },  // Plan 1
+                        { &quot;plan&quot;: { ... } }   // Plan 2
+                    ]
+                }
+            }
+        ]
+    }
+}
+</code></p>
+<h4 id='partial-fill-disabled-partialfill-false'>Partial Fill Disabled (partialFill: false)</h4>
+<p>When partial fill is disabled, the entire order must be executed as planned.
+- The execution plan is split into multiple parts.
+- Each plan executes a portion of the trade at a defined percentage.
+- If any part fails, the entire order is canceled.</p>
+
+<p>Example Request (Partial Fill Disabled)
+<code>json
+{
+    &quot;id&quot;: &quot;7bdac2f7-2b23-42db-94f3-d8963156ef74&quot;,
+    &quot;jsonrpc&quot;: &quot;2.0&quot;,
+    &quot;method&quot;: &quot;place_market_orders&quot;,
+    &quot;params&quot;: {
+        &quot;orders&quot;: [
+            {
+                &quot;pair&quot;: &quot;ETH/USDC&quot;,
+                &quot;side&quot;: &quot;SELL&quot;,
+                &quot;volume&quot;: 1,
+                &quot;price&quot;: 0,
+                &quot;exchange&quot;: &quot;dex-arbitrum.Test&quot;,
+                &quot;start_time&quot;: &quot;2025-02-04T06:28:11.128Z&quot;,
+                &quot;end_time&quot;: &quot;2025-02-04T07:28:11.128Z&quot;,
+                &quot;timezone&quot;: &quot;Asia/Calcutta&quot;,
+                &quot;timestamp&quot;: 1738650536207,
+                &quot;params&quot;: {
+                    &quot;partialFill&quot;: false,
+                    &quot;plans&quot;: [
+                        { &quot;plan&quot;: { ... } },  // Plan 1
+                        { &quot;plan&quot;: { ... } }   // Plan 2
+                    ]
+                }
+            }
+        ]
+    }
+}
+</code></p>
+<h3 id='note-execution-plan-plan-or-plans'>Note: Execution Plan (plan or plans[])</h3>
+<p>The execution plan is taken directly from the response of the place_order_pre_processing_dex API without modifications.
+Partial Fill Handling
+- If partialFill: true, there is only one plan corresponding to each order. This allows for partial execution and prevents transaction failures if the market price moves out of favor.
+- If partialFill: false, the trade is split into multiple plans[], each executing part of the order to ensure full execution.</p>
 
       </div>
       <div class="dark-box">
