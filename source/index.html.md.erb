@@ -32,6 +32,48 @@ The backend service adheres to the same IP whitelist policies as the front-end s
 
 # API_GETWAY
 
+##  Login
+Login to an account. Returns a token.
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": "9cc1e382-ba9a-4992-80aa-fc77628a14d",
+    "method": "login",
+    "params": {
+        "username": "admin",
+        "password": "Admin@123"
+    }
+}
+
+```
+
+### Request
+
+Name | Type | Description
+--------- | ------- | -----------
+username | string |  The user's login name.
+password | string | The user's password.
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": "9cc1e382-ba9a-4992-80aa-fc77628a14d",
+    "result": {
+        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL210dWF0LWJh"
+    }
+}
+
+``` 
+
+### Response
+
+Name | Type | Description
+--------- | ------- | -----------
+token | string | JSON Web Token.
+
+
+
 ## Subscribe_get_pair
 
 Subscribe to a pair. Returns updates on all metrics of that pair on the given exchanges as well as consolidated order books and other metrics across the given exchanges.
