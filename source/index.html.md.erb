@@ -3124,11 +3124,14 @@ Partial fill only applies if a swap route consists of multiple main route parts.
 
 ###Partial Fill Disabled (partialFill: false)
 When partial fill is disabled, the entire order must be executed as planned.
+
 - The execution plan is split into multiple parts.
+
 - Each plan executes a portion of the trade at a defined percentage.
+
 - If any part fails, the entire order is canceled.
 
-#Request (Partial Fill Disabled)
+###Request (Partial Fill Disabled)
 ```json
 {
     "id": "7bdac2f7-2b23-42db-94f3-d8963156ef74",
@@ -3162,5 +3165,7 @@ When partial fill is disabled, the entire order must be executed as planned.
 ###Note: Execution Plan (plan or plans[])
 The execution plan is taken directly from the response of the place_order_pre_processing_dex API without modifications.
 Partial Fill Handling
+
 - If partialFill: true, there is only one plan corresponding to each order. This allows for partial execution and prevents transaction failures if the market price moves out of favor.
+
 - If partialFill: false, the trade is split into multiple plans[], each executing part of the order to ensure full execution.
