@@ -5269,27 +5269,24 @@ alpha_mtd   number  Alpha of the strategy compared to Bitcoin (month-to-date).</
 - The entire volume is allocated to a single execution plan.
 - If the market changes, only a portion of the trade might be executed.</p>
 <h3 id='request-partial-fill-enabled'>Request (Partial Fill Enabled)</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7bdac2f7-2b23-42db-94f3-d8963156ef74"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"508cf9f6-b49f-4d36-a84a-b775570f62f0"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"place_market_orders"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nl">"orders"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="nl">"orders"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">   </span><span class="err">//</span><span class="w"> </span><span class="err">list</span><span class="w"> </span><span class="err">containing</span><span class="w"> </span><span class="err">all</span><span class="w"> </span><span class="err">orders</span><span class="w">
             </span><span class="p">{</span><span class="w">
                 </span><span class="nl">"pair"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ETH/USDC"</span><span class="p">,</span><span class="w">
                 </span><span class="nl">"side"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELL"</span><span class="p">,</span><span class="w">
                 </span><span class="nl">"volume"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
                 </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
                 </span><span class="nl">"exchange"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dex-arbitrum.Test"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-02-04T06:28:11.128Z"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-02-04T07:28:11.128Z"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"end_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-02-04T06:36:09.344Z"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"start_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2025-02-04T05:36:09.344Z"</span><span class="p">,</span><span class="w">
                 </span><span class="nl">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Asia/Calcutta"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1738650536207</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"timestamp"</span><span class="p">:</span><span class="w"> </span><span class="mi">1738647371663</span><span class="p">,</span><span class="w">
                 </span><span class="nl">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="nl">"partialFill"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-                    </span><span class="nl">"plans"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-                        </span><span class="p">{</span><span class="w"> </span><span class="nl">"plan"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">},</span><span class="w">  </span><span class="err">//</span><span class="w"> </span><span class="err">Plan</span><span class="w"> </span><span class="mi">1</span><span class="w">
-                        </span><span class="p">{</span><span class="w"> </span><span class="nl">"plan"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w">   </span><span class="err">//</span><span class="w"> </span><span class="err">Plan</span><span class="w"> </span><span class="mi">2</span><span class="w">
-                    </span><span class="p">]</span><span class="w">
+                    </span><span class="nl">"partialFill"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"plan"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">..</span><span class="p">}</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">Taken</span><span class="w"> </span><span class="err">directly</span><span class="w"> </span><span class="err">from</span><span class="w"> </span><span class="err">fetch</span><span class="w"> </span><span class="err">quotes</span><span class="w"> </span><span class="err">API</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
         </span><span class="p">]</span><span class="w">
