@@ -440,14 +440,6 @@
                   </li>
               </ul>
           </li>
-          <li>
-            <a href="#request-partial-fill-disabled" class="toc-h1 toc-link" data-title="Request (Partial Fill Disabled)">Request (Partial Fill Disabled)</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#note-execution-plan-plan-or-plans" class="toc-h2 toc-link" data-title="Note: Execution Plan (plan or plans[])">Note: Execution Plan (plan or plans[])</a>
-                  </li>
-              </ul>
-          </li>
       </ul>
     </div>
     <div class="page-wrapper">
@@ -5304,11 +5296,14 @@ alpha_mtd   number  Alpha of the strategy compared to Bitcoin (month-to-date).</
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='partial-fill-disabled-partialfill-false'>Partial Fill Disabled (partialFill: false)</h3>
-<p>When partial fill is disabled, the entire order must be executed as planned.
-- The execution plan is split into multiple parts.
-- Each plan executes a portion of the trade at a defined percentage.
-- If any part fails, the entire order is canceled.</p>
-<h1 id='request-partial-fill-disabled'>Request (Partial Fill Disabled)</h1><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+<p>When partial fill is disabled, the entire order must be executed as planned.</p>
+
+<ul>
+<li><p>The execution plan is split into multiple parts.</p></li>
+<li><p>Each plan executes a portion of the trade at a defined percentage.</p></li>
+<li><p>If any part fails, the entire order is canceled.</p></li>
+</ul>
+<h3 id='request-partial-fill-disabled'>Request (Partial Fill Disabled)</h3><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7bdac2f7-2b23-42db-94f3-d8963156ef74"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"jsonrpc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"place_market_orders"</span><span class="p">,</span><span class="w">
@@ -5337,9 +5332,12 @@ alpha_mtd   number  Alpha of the strategy compared to Bitcoin (month-to-date).</
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h3 id='note-execution-plan-plan-or-plans'>Note: Execution Plan (plan or plans[])</h3>
 <p>The execution plan is taken directly from the response of the place_order_pre_processing_dex API without modifications.
-Partial Fill Handling
-- If partialFill: true, there is only one plan corresponding to each order. This allows for partial execution and prevents transaction failures if the market price moves out of favor.
-- If partialFill: false, the trade is split into multiple plans[], each executing part of the order to ensure full execution.</p>
+Partial Fill Handling</p>
+
+<ul>
+<li><p>If partialFill: true, there is only one plan corresponding to each order. This allows for partial execution and prevents transaction failures if the market price moves out of favor.</p></li>
+<li><p>If partialFill: false, the trade is split into multiple plans[], each executing part of the order to ensure full execution.</p></li>
+</ul>
 
       </div>
       <div class="dark-box">
