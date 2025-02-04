@@ -2927,18 +2927,16 @@ This API is used to fetch token swap quotes for a given trading pair.
 
 ```json
 {
-    "id": "595d4d5a-fb97-4577-9a0d-edcee13a5e5e",
+    "id": "cd728c5d-b8ca-40ee-a9cf-895a91cf2571",
     "jsonrpc": "2.0",
     "method": "place_order_pre_processing_dex",
     "params": {
-        "pair": "USDC/SOL",
+        "pair": "ETH/USDC",
         "side": "SELL",
         "amount": 1,
-        "exchange_ids": [
-            "dex-bnb.admin"
-        ],
+        "exchange_ids": ["dex-arbitrum.Test"],
         "type": "SPOT",
-        "unit": "USDC",
+        "unit": "ETH",
         "slippage": 1,
         "algo_type": "SWAP",
         "price": 0
@@ -2967,76 +2965,74 @@ This API is used to fetch token swap quotes for a given trading pair.
 ```json
 {
     "jsonrpc": "2.0",
-    "id": "595d4d5a-fb97-4577-9a0d-edcee13a5e5e",
+    "id": "cd728c5d-b8ca-40ee-a9cf-895a91cf2571",
     "result": {
+        "total_volume": "1.0000",
         "base_amount": 1.0,
-        "quote_amount": 0.006358516993544726,
-        "usd_amount": 1.00008225440979,
-        "usd_base_amount": 1.00008225440979,
-        "usd_quote_amount": 0.9864042430477954,
-        "contract_amount": "1.0000",
-        "conversion_price_source": "yahoo finance",
+        "quote_amount": 2669.771179,
+        "usd_amount": 3066.624755859375,
+        "usd_base_amount": 3066.624755859375,
+        "usd_quote_amount": 2669.3294320025893,
         "plan": [
             {
-                "exchange": "BNB",
-                "exchange_id": "dex-bnb.admin",
+                "exchange": "Arbitrum",
+                "exchange_id": "dex-arbitrum.Test",
                 "step_price": null,
                 "step_volume": null,
-                "path": [
-                    "USDC",
-                    100,
-                    "PANCAKESWAP_V3",
-                    "WBNB",
-                    500,
-                    "PANCAKESWAP_V3",
-                    "USDT",
-                    10000,
-                    "UNISWAP_V3",
-                    "SOL"
-                ],
-                "base_amount": 0.1,
-                "quote_amount": 0.0006374346561208406,
+                "base_amount": 1.0,
+                "quote_amount": 2669.771179,
+                "base_amount_usd": 2750.2073,
+                "quote_amount_usd": 2669.8470005014833,
                 "gas_amount": 0.0,
-                "gas_unit": "BNB",
-                "percent": 10,
-                "allAmounts": [
-                    "100000000000000000",
-                    "170782042952549",
-                    "100024146180649151",
-                    "643809002682049"
-                ],
-                "tokenPathAddresses": [
-                    "0X8AC76A51CC950D9822D68B83FE1AD97B32CD580D",
-                    100,
-                    "PANCAKESWAP_V3",
-                    "0XBB4CDB9CBD36B01BD1CBAEBF2DE08D9173BC095C",
-                    500,
-                    "PANCAKESWAP_V3",
-                    "0X55D398326F99059FF775485246999027B3197955",
-                    10000,
-                    "UNISWAP_V3",
-                    "0X570A5D26F7765ECB712C0924E4DE545B89FD43DF"
-                ],
+                "gas_unit": "ETH",
+                "percent": 100,
                 "slippage": "1.0000",
-                "volume": "0.1000",
-                "price": "0.0064",
-                "unit": "USDC",
-                "unit_volume": "0.1000",
-                "transaction_amount": "0.1000",
-                "transaction_unit": "USDC",
+                "route_amounts": [
+                    "1000000000000000000",
+                    "2669771179"
+                ],
+                "route_path_symbol": [
+                    "WETH",
+                    500,
+                    "UNISWAP_V3",
+                    "USDC"
+                ],
+                "route_path_address": [
+                    "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
+                    500,
+                    "UNISWAP_V3",
+                    "0xaf88d065e77c8cC2239327C5EDb3A432268e5831"
+                ],
+                "amm_configs": [null],
+                "pool_states": ["0xC6962004f452bE9203591991D15f6b388e09E8D0"],
+                "token_mints": [
+                    "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
+                    "0xaf88d065e77c8cC2239327C5EDb3A432268e5831"
+                ],
+                "token_vaults": [null, null],
+                "token_programs": [null, null],
+                "observation_states": [null],
+                "remaining_accounts": [[]],
+                "zero_for_ones": [true],
+                "route_dex_ids": ["UNISWAP_V3"],
+                "total_raw_base_amount": 1000000000000000000,
+                "total_raw_quote_amount": 2669771179,
+                "volume": "1.0000",
+                "price": "2669.7712",
                 "base": {
-                    "unit": "USDC",
-                    "volume": 0.1
+                    "unit": "ETH",
+                    "volume": 1.0,
+                    "volume_usd": 2750.2073
                 },
                 "quote": {
-                    "unit": "SOL",
-                    "volume": 0.0006374346561208406
+                    "unit": "USDC",
+                    "volume": 2669.771179,
+                    "volume_usd": 2669.8470005014833
                 },
-                "usd_volume": "0.1000"
-            },
-            // More plan items here...
-        ],
-        "total_volume": "1.0000"
+                "usd_volume": "3066.6248",
+                "gas_amount_usd": 0.0
+            }
+        ]
     }
 }
 ```
@@ -3046,140 +3042,124 @@ This API is used to fetch token swap quotes for a given trading pair.
 | jsonrpc                      | string  | The JSON-RPC version, typically "2.0".                                                                         |
 | id                           | string  | The ID from the request, echoed back in the response.                                                           |
 | result                       | object  | Contains the results of the fetch quotes operation.                                                             |
+| result.total_volume          | string  | The total volume of the trade represented as a string.                                                         |
 | result.base_amount           | number  | The base amount specified for the quote.                                                                        |
 | result.quote_amount          | number  | The amount of the quote currency corresponding to the base amount.                                              |
 | result.usd_amount            | number  | The equivalent amount in USD for the base amount.                                                               |
 | result.usd_base_amount       | number  | The USD equivalent of the base amount.                                                                          |
 | result.usd_quote_amount      | number  | The USD equivalent of the quote amount.                                                                         |
-| result.contract_amount       | string  | The amount as formatted for the contract, typically shown with fixed decimal places.                           |
 | result.plan                  | array   | An array of execution plans used for placing the order, with details for each step.                            |
-| result.total_volume          | string  | The total volume of the trade represented as a string.                                                         |
-| result.plan[].exchange       | string  | The exchange being used in the step of the execution plan (e.g., "BNB").                                      |
-| result.plan[].exchange_id    | string  | The unique identifier for the exchange used in the step.                                                       |
-| result.plan[].path           | array   | The path of tokens used in the swap, detailing the sequence of exchanges.                                     |
-| result.plan[].base_amount    | number  | The amount of the base currency for this step.                                                                 |
-| result.plan[].quote_amount   | number  | The amount of the quote currency for this step.                                                                |
-| result.plan[].gas_amount     | number  | The amount of gas required for this step.                                                                      |
-| result.plan[].gas_unit       | string  | The unit of gas being used (e.g., "BNB").                                                                     |
-| result.plan[].percent        | number  | The percentage of the total volume allocated to this step.                                                     |
-| result.plan[].allAmounts     | array   | An array of all amounts involved at each step in the plan.                                                    |
-| result.plan[].tokenPathAddresses | array | An array of token addresses in the path of the swap.                                                          |
-| result.plan[].slippage       | string  | The slippage percentage for this step, typically as a string.                                                  |
-| result.plan[].volume         | string  | The volume for the transaction as a string.                                                                    |
-| result.plan[].base           | object  | An object containing base currency details, including unit and volume.                                         |
-| result.plan[].quote          | object  | An object containing quote currency details, including unit and volume.                                        |
-
 
 ---
 
 ## place_market_orders (Place Orders)
 
-This API is used to place market orders for a token swap, using the quotes fetched in the previous step.
+This API is used to place market orders for a token swap, using the quotes fetched in the previous step. Orders can either allow partial fill (enabling partial execution in case of liquidity constraints) or require full execution (ensuring the entire order is completed as planned).
 
 ### Request
 
+#### main fields
+| Name          | Type   | Description                                                   |
+|--------------|--------|---------------------------------------------------------------|
+| id          | string | Unique identifier for the request.                             |
+| jsonrpc     | string | JSON-RPC version, typically "2.0".                             |
+| method      | string | The method name, always "place_market_orders".                 |
+| params      | object | The parameters for placing market orders.                      |
+
+#### params.orders[]
+| Name       | Type   | Description                                          |
+|-----------|--------|------------------------------------------------------|
+| pair      | string | The trading pair (e.g., "ETH/USDC").                 |
+| side      | string | "BUY" or "SELL".                                      |
+| volume    | number | Amount of the base asset being traded.               |
+| price     | number | Execution price (set to 0 for market orders).        |
+| exchange  | string | The exchange name where the order will be executed.  |
+| start_time| string | Start time of the order (ISO 8601 format).           |
+| end_time  | string | Expiration time of the order (ISO 8601 format).      |
+| timezone  | string | The timezone of the order timestamps.                |
+| timestamp | number | Epoch timestamp of when the order was created.       |
+| params    | object  | Object containing order details                     |
+
+
+
+###Execution Strategy
+####Partial Fill Enabled (partialFill: true)
+Partial fill only applies if a swap route consists of multiple main route parts. It allows for partial execution, preventing the transaction from being reversed if the market price moves out of favor.
+- The plan is taken directly from the place_order_pre_processing_dex API response without modification.
+- The entire volume is allocated to a single execution plan.
+- If the market changes, only a portion of the trade might be executed.
+
+
+Example Request (Partial Fill Enabled)
 ```json
 {
-  "id": "c44b40c2-b0fe-4cb5-9097-55d0873d2c86",
-  "jsonrpc": "2.0",
-  "method": "place_market_orders",
-  "params": {
-    "orders": [
-      {
-        "pair": "SOL/USDC",
-        "side": "BUY",
-        "volume": "0.007",
-        "price": 0,
-        "exchange": "dex-bnb.admin",
-        "end_time": "2024-06-24T10:39:25.341Z",
-        "start_time": "2024-06-24T09:39:39.484Z",
-        "timezone": "Asia/Calcutta",
-        "timestamp": 1719221974802,
-        "params": {
-          // Use the exact plan received in the quotes response as the plan for this order
-          "slippage": 1,
-          "plan": {
-            "exchange": "BNB",
-            "exchange_id": "dex-bnb.admin",
-            "step_price": null,
-            "step_volume": null,
-            "path": [
-              "USDC",
-              100,
-              "PANCAKESWAP_V3",
-              "WBNB",
-              500,
-              "PANCAKESWAP_V3",
-              "USDT",
-              10000,
-              "UNISWAP_V3",
-              "SOL"
-            ],
-            "base_amount": 0.1,
-            "quote_amount": 0.0006374346561208406,
-            "gas_amount": 0,
-            "gas_unit": "BNB",
-            "percent": 10,
-            "allAmounts": [
-              "100000000000000000",
-              "170782042952549",
-              "100024146180649151",
-              "643809002682049"
-            ],
-            "tokenPathAddresses": [
-              "0X8AC76A51CC950D9822D68B83FE1AD97B32CD580D",
-              100,
-              "PANCAKESWAP_V3",
-              "0XBB4CDB9CBD36B01BD1CBAEBF2DE08D9173BC095C",
-              500,
-              "PANCAKESWAP_V3",
-              "0X55D398326F99059FF775485246999027B3197955",
-              10000,
-              "UNISWAP_V3",
-              "0X570A5D26F7765ECB712C0924E4DE545B89FD43DF"
-            ],
-            "slippage": "1.0000",
-            "volume": "0.1000",
-            "price": "0.0064",
-            "unit": "USDC",
-            "unit_volume": "0.1000",
-            "transaction_amount": "0.1000",
-            "transaction_unit": "USDC",
-            "base": {
-              "unit": "USDC",
-              "volume": 0.1
-            },
-            "quote": {
-              "unit": "SOL",
-              "volume": 0.0006374346561208406
-            },
-            "usd_volume": "0.1000"
-          }
-        }
-      }
-      // Add more orders here, each using the exact plan received from the quotes response
-    ]
-  }
+    "id": "7bdac2f7-2b23-42db-94f3-d8963156ef74",
+    "jsonrpc": "2.0",
+    "method": "place_market_orders",
+    "params": {
+        "orders": [
+            {
+                "pair": "ETH/USDC",
+                "side": "SELL",
+                "volume": 1,
+                "price": 0,
+                "exchange": "dex-arbitrum.Test",
+                "start_time": "2025-02-04T06:28:11.128Z",
+                "end_time": "2025-02-04T07:28:11.128Z",
+                "timezone": "Asia/Calcutta",
+                "timestamp": 1738650536207,
+                "params": {
+                    "partialFill": false,
+                    "plans": [
+                        { "plan": { ... } },  // Plan 1
+                        { "plan": { ... } }   // Plan 2
+                    ]
+                }
+            }
+        ]
+    }
 }
 ```
-| Name                         | Type    | Description                                                                                                     |
-|------------------------------|---------|-----------------------------------------------------------------------------------------------------------------|
-| id                           | string  | A unique identifier for the request.                                                                            |
-| jsonrpc                      | string  | The JSON-RPC version, typically "2.0".                                                                         |
-| method                       | string  | The API method being invoked; in this case, "place_market_orders".                                             |
-| params                       | object  | Contains the parameters for the API method.                                                                     |
-| params.orders                | array   | An array of orders to be placed.                                                                                |
-| params.orders[].pair        | string  | The trading pair for the order (e.g., "SOL/USDC").                                                             |
-| params.orders[].side        | string  | The side of the order: "BUY" or "SELL".                                                                        |
-| params.orders[].volume      | string  | The volume of the base currency to trade as a string.                                                          |
-| params.orders[].price       | number  | The price limit for the order; set to 0 for market orders.                                                    |
-| params.orders[].exchange     | string  | The exchange where the order will be placed (e.g., "dex-bnb.admin").                                          |
-| params.orders[].end_time    | string  | The expiration time for the order in ISO 8601 format.                                                          |
-| params.orders[].start_time   | string  | The start time for the order in ISO 8601 format.                                                              |
-| params.orders[].timezone     | string  | The timezone in which the start and end times are specified (e.g., "Asia/Calcutta").                          |
-| params.orders[].timestamp    | number  | The timestamp of when the order is being placed, in milliseconds since epoch.                                  |
-| params.orders[].params       | object  | Additional parameters for the order, including slippage and plan details.                                       |
-| params.orders[].params.slippage | number  | Maximum allowed slippage percentage for the order.                                                             |
-| params.orders[].params.plan   | object  | Copy-paste the exact plan received in the quotes response here.                                                |
 
+####Partial Fill Disabled (partialFill: false)
+When partial fill is disabled, the entire order must be executed as planned.
+- The execution plan is split into multiple parts.
+- Each plan executes a portion of the trade at a defined percentage.
+- If any part fails, the entire order is canceled.
 
+Example Request (Partial Fill Disabled)
+```json
+{
+    "id": "7bdac2f7-2b23-42db-94f3-d8963156ef74",
+    "jsonrpc": "2.0",
+    "method": "place_market_orders",
+    "params": {
+        "orders": [
+            {
+                "pair": "ETH/USDC",
+                "side": "SELL",
+                "volume": 1,
+                "price": 0,
+                "exchange": "dex-arbitrum.Test",
+                "start_time": "2025-02-04T06:28:11.128Z",
+                "end_time": "2025-02-04T07:28:11.128Z",
+                "timezone": "Asia/Calcutta",
+                "timestamp": 1738650536207,
+                "params": {
+                    "partialFill": false,
+                    "plans": [
+                        { "plan": { ... } },  // Plan 1
+                        { "plan": { ... } }   // Plan 2
+                    ]
+                }
+            }
+        ]
+    }
+}
+```
+
+###Note: Execution Plan (plan or plans[])
+The execution plan is taken directly from the response of the place_order_pre_processing_dex API without modifications.
+Partial Fill Handling
+- If partialFill: true, there is only one plan corresponding to each order. This allows for partial execution and prevents transaction failures if the market price moves out of favor.
+- If partialFill: false, the trade is split into multiple plans[], each executing part of the order to ensure full execution.
