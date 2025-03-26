@@ -12,7 +12,7 @@ Please note, this API was initially designed for internal use, primarily for fro
 
 ## Base URL
 
-Assuming your Auro Digital URL is `https://test.aurodigital.ai/`, your corresponding WebSocket URL would be: `wss://test-backend.aurodigital.ai/v2`.
+Assuming your Auro Digital URL is `https://mt-prod-admin.aurodigital.ai`, your corresponding WebSocket URL would be: `wss://mt-prod-backend.aurodigital.ai/v2`.
 
 The backend service adheres to the same IP whitelist policies as the front-end service. If you need to add (static) IP addresses to the whitelist, please contact our support team.
 
@@ -37,12 +37,12 @@ Login to an account. Returns a token.
 
 ```json
 {
+    "id": "1",
     "jsonrpc": "2.0",
-    "id": "9cc1e382-ba9a-4992-80aa-fc77628a14d",
-    "method": "login",
+    "method": "gateway_login",
     "params": {
-        "username": "admin",
-        "password": "Admin@123"
+        "api_key": "imb0eoq1ixknpouee1wq",
+        "secret_key" : "etmhiie6bkadcfkla3k8rp"
     }
 }
 
@@ -52,16 +52,14 @@ Login to an account. Returns a token.
 
 Name | Type | Description
 --------- | ------- | -----------
-username | string |  The user's login name.
-password | string | The user's password.
+api_key | string |  The user's lapi_key.
+secret_key | string | The user's secret_key.
 
 ```json
 {
     "jsonrpc": "2.0",
     "id": "9cc1e382-ba9a-4992-80aa-fc77628a14d",
-    "result": {
-        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL210dWF0LWJh"
-    }
+    "result": "user Logged in"
 }
 
 ``` 
@@ -70,7 +68,7 @@ password | string | The user's password.
 
 Name | Type | Description
 --------- | ------- | -----------
-token | string | JSON Web Token.
+status | string | Authentication Status.
 
 
 
