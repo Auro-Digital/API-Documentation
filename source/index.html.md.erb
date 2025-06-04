@@ -24,6 +24,72 @@ The backend service adheres to the same IP whitelist policies as the front-end s
 |method  | string | Establishing the specific API to connect to. Documented below |
 |params  | string | Details regarding the specific API call. Documented below     |
 
+
+# About
+
+## Introduction
+
+Auracle is a high-performance decentralized oracle system built on Cosmos SDK that bridges blockchain networks with trusted real-world data. Our platform provides secure, low-latency data feeds from markets, sensors, and other real-time sources with industry-leading 5-second finality, enabling developers to build robust blockchain applications with reliable access to off-chain information.
+
+## Product Offerings
+
+### Auracle Prime
+Enterprise-focused hybrid architecture combining controlled off-chain processing with on-chain verification. This solution ensures maximum security while providing full in-house control for enterprise clients with specific compliance and reliability requirements.
+
+### Auracle Sovereign
+Fully decentralized network where independent nodes and stakers participate in distributed data sourcing. This permissionless solution is secured by crypto-economic incentives and cryptographic verification mechanisms, ideal for public blockchain applications.
+
+## Key Technical Features
+
+- Native Cosmos Integration: Built on Cosmos SDK with full IBC (Inter-Blockchain Communication) compatibility
+- Flexible Deployment Options: Available as hybrid or fully permissionless implementations
+- High Performance: 5-second finality for near real-time data availability
+- Complete Infrastructure Ownership: End-to-end control of the oracle stack
+- Extensive Connectivity: Integrations with 96+ centralized exchanges, 124+ DeFi protocols, and major blockchain networks
+
+## System Architecture
+
+### Oracle Engine
+- Continuously polls external data sources (APIs, IoT)
+- Validates, aggregates, and cryptographically signs data
+
+### Blockchain Infrastructure
+- Permissioned Tendermint-based consensus
+- Validator nodes execute CosmWasm smart contracts
+- IBC enables cross-chain interoperability
+
+### Data Processing & Security
+- Digital signatures with stored public keys
+- Strict data validation (timestamps, value ranges)
+- Immutable ledger transactions for auditability
+
+### User Access & Management
+- REST APIs for querying validated on-chain data
+- Secure transmission via TLS/SSL
+- Identity management with ACLs and cryptographic access control
+
+## Data Flow Process
+
+1. Data Acquisition: Oracle Engine fetches data from external sources
+2. Cryptographic Signing: Data payloads are cryptographically signed
+3. Transaction Submission: Signed data submitted via Cosmos SDK
+4. On-chain Validation: CosmWasm contracts verify digital signatures
+5. Immutable Storage: Validated data stored on the blockchain
+6. Secure Distribution: External applications access data through API Gateway
+
+## Business Model
+
+- Tiered subscription model based on data frequency, volume, and types
+- Custom enterprise solutions with dedicated oracle implementation
+- AURO token economy for governance and incentives
+
+## Getting Started
+
+The Auracle API documentation provides detailed information on how to integrate our oracle services into your blockchain applications. For enterprise solutions or custom implementations, please contact our sales team.
+
+---
+
+© 2025 Auracle | Contact: ds@auroim.com
 # Authentication
 
 After you've established a WebSocket connection, you will need to authenticate before you can call the other methods.
@@ -861,6 +927,8 @@ List all registered webhooks.
 
 ##Register_Webhooks
 Register a new webhook callback URL with event subscriptions.
+
+
 ```json
 {
     "id": "908ee8b3-b4bc-4045-a9bd-c32e18d10049",
@@ -909,6 +977,7 @@ Remove a registered webhook.
 }
 
 ```
+
 ### Request
 | Name | Type   | Description               |
 | ---- | ------ | ------------------------- |
@@ -939,11 +1008,13 @@ Remove a registered webhook.
 ## Verifiable Randomness (VRF)
 
 ### Request Randomness
+
 ```http
 POST /v1/vrf/requests
 ```
 
 Request:
+
 ```json
 {
     "consumerId": "my-app",
@@ -954,6 +1025,7 @@ Request:
 ```
 
 Response:
+
 ```json
 {
     "requestId": "vrf_123",
@@ -963,11 +1035,13 @@ Response:
 ```
 
 ### Check Request Status
+
 ```http
 GET /v1/vrf/requests/{requestId}
 ```
 
 Response:
+
 ```json
 {
     "requestId": "vrf_123",
@@ -977,6 +1051,7 @@ Response:
     "fulfilledAt": "2024-03-19T16:01:00Z"
 }
 ```
+
 #Governance & Token (Sovereign Only)
 
 ##List Proposals
@@ -1029,6 +1104,8 @@ List all governance proposals.
 ##Create Proposals
 
 Create governance proposals.
+
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -1074,6 +1151,7 @@ Create governance proposals.
 ##Voting
 
 Cast a vote on a specific governance proposal.
+
 ```json
 {
   "jsonrpc": "2.0",
@@ -1301,14 +1379,7 @@ Retrieve audit logs with query parameters for start and end time.
 ##Usage
 
 Retrieve API call breakdown by endpoint.
-```json
-{
-  "jsonrpc": "2.0",
-  "id": "unique-request-id",
-  "method": "Usage",
 
-}
-```
 
 ### Request
 
@@ -1337,6 +1408,7 @@ Retrieve API call breakdown by endpoint.
 ## Error Handling
 
 All errors follow this format:
+
 ```json
 {
     "code": "INVALID_REQUEST",
