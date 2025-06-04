@@ -1,250 +1,10 @@
+
+
 # Auracle API
 
 ## Overview
 
 The Auracle API provides both REST and WebSocket interfaces for interacting with our services. The REST API follows standard HTTP conventions and supports both Prime and Sovereign tiers, while the WebSocket API enables real-time data exchange.
-
-# REST API
-
-## Base URL
-
-All REST API endpoints are prefixed with `/v1/`. For example:
-- Production: `https://api.auracle.digital/v1/`
-- Test: `https://test-api.auracle.digital/v1/`
-
-## Authentication
-
-### Login with API Key
-
-```http
-POST /v1/auth/login
-```
-
-Request:
-```json
-{
-    "apiKey": "your_api_key",
-    "apiSecret": "your_api_secret"
-}
-```
-
-Response:
-```json
-{
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-    "expiresAt": "2024-03-20T12:00:00Z"
-}
-```
-
-### API Key Management
-
-#### List API Keys
-```http
-GET /v1/auth/keys
-```
-
-Response:
-```json
-{
-    "keys": [
-        {
-            "id": "key_123",
-            "name": "Production Key",
-            "createdAt": "2024-03-01T00:00:00Z",
-            "lastUsed": "2024-03-19T15:30:00Z"
-        }
-    ]
-}
-```
-
-#### Generate New API Key
-```http
-POST /v1/auth/keys
-```
-
-Request:
-```json
-{
-    "name": "New API Key",
-    "permissions": ["read", "write"]
-}
-```
-
-Response:
-```json
-{
-    "id": "key_456",
-    "apiKey": "ak_live_...",
-    "apiSecret": "as_live_...",
-    "createdAt": "2024-03-19T16:00:00Z"
-}
-```
-
-#### Revoke API Key
-```http
-DELETE /v1/auth/keys/{keyId}
-```
-
-## Health & Metrics
-
-### Health Check
-```http
-GET /health
-```
-
-Response:
-```json
-{
-    "status": "ok",
-    "uptime": 1234567
-}
-```
-
-### Metrics
-```http
-GET /metrics
-```
-
-Returns Prometheus-compatible metrics.
-
-## Rate Limiting
-
-Standard rate limit headers are included in all responses:
-- `X-RateLimit-Limit`: Maximum requests per window
-- `X-RateLimit-Remaining`: Remaining requests in current window
-- `X-RateLimit-Reset`: Time when the rate limit resets
-
-## Data Feeds
-
-### Latest Aggregated Data
-```http
-GET /v1/feeds/{feedId}/latest
-```
-
-Response:
-```json
-{
-    "feedId": "BTC-USD",
-    "value": 65432.10,
-    "timestamp": "2024-03-19T16:00:00Z",
-    "confidence": 0.99
-}
-```
-
-### Historical Data
-```http
-GET /v1/feeds/{feedId}/history?start=2024-03-01T00:00:00Z&end=2024-03-19T00:00:00Z&limit=100
-```
-
-Response:
-```json
-{
-    "feedId": "BTC-USD",
-    "data": [
-        {
-            "value": 65432.10,
-            "timestamp": "2024-03-19T16:00:00Z"
-        }
-    ]
-}
-```
-
-## Real-Time Streaming
-
-### WebSocket Connection
-```http
-WebSocket /v1/stream
-```
-
-Subscribe message:
-```json
-{
-    "action": "subscribe",
-    "feeds": ["BTC-USD", "ETH-USD"]
-}
-```
-
-Stream message:
-```json
-{
-    "feedId": "BTC-USD",
-    "value": 65432.10,
-    "timestamp": "2024-03-19T16:00:00Z"
-}
-```
-
-## Verifiable Randomness (VRF)
-
-### Request Randomness
-```http
-POST /v1/vrf/requests
-```
-
-Request:
-```json
-{
-    "consumerId": "my-app",
-    "numWords": 1,
-    "confirmationCount": 3,
-    "callbackUrl": "https://my-app.com/vrf-callback"
-}
-```
-
-Response:
-```json
-{
-    "requestId": "vrf_123",
-    "status": "pending",
-    "requestedAt": "2024-03-19T16:00:00Z"
-}
-```
-
-### Check Request Status
-```http
-GET /v1/vrf/requests/{requestId}
-```
-
-Response:
-```json
-{
-    "requestId": "vrf_123",
-    "status": "fulfilled",
-    "randomWords": ["0x1234..."],
-    "proof": "0x5678...",
-    "fulfilledAt": "2024-03-19T16:01:00Z"
-}
-```
-
-## Error Handling
-
-All errors follow this format:
-```json
-{
-    "code": "INVALID_REQUEST",
-    "message": "Invalid request parameters",
-    "details": {
-        "field": "amount",
-        "reason": "must be positive"
-    }
-}
-```
-
-Common error codes:
-- 400: Bad Request
-- 401: Unauthorized
-- 403: Forbidden
-- 404: Not Found
-- 429: Too Many Requests
-- 500: Internal Server Error
-
-# WebSocket API
-
-## Overview
-
-The Auracle API employs WebSockets for communication between the front-end and back-end services, allowing real-time data exchange. For developers aiming to programmatically interact with Auracle, a direct WebSocket connection to the back-end service can be established.
-
-Please note, this API was initially designed for internal use, primarily for front-end development. Therefore, it may possess some complex payloads. Furthermore, it is subject to potential changes based on the evolving needs of the front-end application.
-
 # Connection Details
 
 ## Base URL
@@ -264,6 +24,72 @@ The backend service adheres to the same IP whitelist policies as the front-end s
 |method  | string | Establishing the specific API to connect to. Documented below |
 |params  | string | Details regarding the specific API call. Documented below     |
 
+
+# About
+
+## Introduction
+
+Auracle is a high-performance decentralized oracle system built on Cosmos SDK that bridges blockchain networks with trusted real-world data. Our platform provides secure, low-latency data feeds from markets, sensors, and other real-time sources with industry-leading 5-second finality, enabling developers to build robust blockchain applications with reliable access to off-chain information.
+
+## Product Offerings
+
+### Auracle Prime
+Enterprise-focused hybrid architecture combining controlled off-chain processing with on-chain verification. This solution ensures maximum security while providing full in-house control for enterprise clients with specific compliance and reliability requirements.
+
+### Auracle Sovereign
+Fully decentralized network where independent nodes and stakers participate in distributed data sourcing. This permissionless solution is secured by crypto-economic incentives and cryptographic verification mechanisms, ideal for public blockchain applications.
+
+## Key Technical Features
+
+- Native Cosmos Integration: Built on Cosmos SDK with full IBC (Inter-Blockchain Communication) compatibility
+- Flexible Deployment Options: Available as hybrid or fully permissionless implementations
+- High Performance: 5-second finality for near real-time data availability
+- Complete Infrastructure Ownership: End-to-end control of the oracle stack
+- Extensive Connectivity: Integrations with 96+ centralized exchanges, 124+ DeFi protocols, and major blockchain networks
+
+## System Architecture
+
+### Oracle Engine
+- Continuously polls external data sources (APIs, IoT)
+- Validates, aggregates, and cryptographically signs data
+
+### Blockchain Infrastructure
+- Permissioned Tendermint-based consensus
+- Validator nodes execute CosmWasm smart contracts
+- IBC enables cross-chain interoperability
+
+### Data Processing & Security
+- Digital signatures with stored public keys
+- Strict data validation (timestamps, value ranges)
+- Immutable ledger transactions for auditability
+
+### User Access & Management
+- REST APIs for querying validated on-chain data
+- Secure transmission via TLS/SSL
+- Identity management with ACLs and cryptographic access control
+
+## Data Flow Process
+
+1. Data Acquisition: Oracle Engine fetches data from external sources
+2. Cryptographic Signing: Data payloads are cryptographically signed
+3. Transaction Submission: Signed data submitted via Cosmos SDK
+4. On-chain Validation: CosmWasm contracts verify digital signatures
+5. Immutable Storage: Validated data stored on the blockchain
+6. Secure Distribution: External applications access data through API Gateway
+
+## Business Model
+
+- Tiered subscription model based on data frequency, volume, and types
+- Custom enterprise solutions with dedicated oracle implementation
+- AURO token economy for governance and incentives
+
+## Getting Started
+
+The Auracle API documentation provides detailed information on how to integrate our oracle services into your blockchain applications. For enterprise solutions or custom implementations, please contact our sales team.
+
+---
+
+© 2025 Auracle | Contact: ds@auroim.com
 # Authentication
 
 After you've established a WebSocket connection, you will need to authenticate before you can call the other methods.
@@ -345,4 +171,1259 @@ auth_token | string | Authentication Token received from login
 Name | Type | Description
 --------- | ------- | -----------
 result | string | Confirmation of request. "ok" indicates positive confirmation.  <br /> Negative confirmation will display an "error" field instead of "result"
+# Health & Metrics
 
+
+## Health
+
+
+Use the GET /health  method 
+
+
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": "22ad7310-b318-4eee-8618-b3c47ca2f225",
+    "method": "Health"
+}
+```
+
+### Request
+
+
+
+```json
+{
+    {
+    "jsonrpc": "2.0",
+    "id": "22ad7310-b318-4eee-8618-b3c47ca2f225",
+    "result": {
+        "status": "ok",
+        "uptime": 12345
+    }
+}
+}
+```
+
+### Response
+
+Name | Type | Description
+--------- | ------- | -----------
+status | string | Service health status. "ok" means healthy
+uptime | number | 	Uptime of the service in seconds
+
+
+##Metrics
+
+
+### Request
+
+
+```json
+{
+"id": "b1b61f11-d34b-408b-ba46-cd6c1907252b",
+"jsonrpc": "2.0",
+    "result": {
+    "best_bid": {
+    "price": 0.06296,
+    "size": 86.378417,
+    "exchange": "okx-new_test",
+    "timestamp": 1691055448
+    },
+"display_name": "okx-new_test"
+    }
+}
+```
+
+### Response
+Name | Type | Description
+--------- | ------- | -----------
+result|string|	Prometheus-formatted metrics as plain text
+
+ 
+## Rate Limiting
+
+
+
+
+### Request
+
+
+```json
+{
+  "id": "b1b61f11-d34b-408b-ba46-cd6c1907252b",
+  "jsonrpc": "2.0",
+  "result": {
+    "rate_limit": {
+      "limit": 1000,
+      "remaining": 750,
+      "reset": 1685373600
+    },
+    "service_name": "example-api"
+  }
+}
+}
+```
+
+### Response
+
+There are 3 X-RateLimit-> Limit, Remaining, Reset
+
+Name | Type | Description
+--------- | ------- | -----------
+Limit | number | The maximum number of requests allowed in the current rate limit window
+Remaining |number  | 	The number of requests remaining in the current rate limit window.
+Reset      |number |The time at which the current rate limit window resets in UNIX epoch seconds (UTC timestamp).
+
+# Subscription & Billing (Prime)
+
+##Subscription_Plans
+
+Retrieve the current subscription plan and usage details.
+
+
+
+### Request
+
+
+
+```json
+
+
+
+{
+  "jsonrpc": "2.0",
+  "id": "unique-request-id",
+  "result": {
+    "plan": {
+      "id": "basic-monthly",
+      "name": "Basic Monthly",
+      "features": ["feature1", "feature2"],
+      "price": 1999,
+      "currency": "INR",
+      "status": "active",
+      "usage": {
+        "current_period_start": 1683004800,
+        "current_period_end": 1685596800,
+        "used_units": 120,
+        "total_units": 1000
+      }
+    }
+  }
+}
+
+```
+
+### Response
+| Name                              | Type    | Description                                     |
+| --------------------------------- | ------- | ----------------------------------------------- |
+| plan                              | Object  | Subscription plan details                       |
+| plan.id                           | string  | Unique plan identifier                          |
+| plan.name                         | string  | Plan display name                               |
+| plan.features                     | array   | List of plan features                           |
+| plan.price                        | integer | Price in smallest currency unit (e.g., paise)   |
+| plan.currency                     | string  | Currency code (e.g., INR, USD)                  |
+| plan.status                       | string  | Current subscription status (active, cancelled) |
+| plan.usage                        | Object  | Usage details within the current billing period |
+| plan.usage.current\_period\_start | integer | Unix timestamp (seconds) for period start       |
+| plan.usage.current\_period\_end   | integer | Unix timestamp (seconds) for period end         |
+| plan.usage.used\_units            | integer | Number of units consumed                        |
+| plan.usage.total\_units           | integer | Total units allowed in the period               |
+
+## Subscriptions_Update
+
+Upgrade or downgrade the subscription plan.
+
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": "unique-request-id",
+  "method": "Subscriptions_Update",
+  "params": {
+    "plan_id": "premium-monthly"
+  }
+}
+```
+
+### Request
+
+| Name     | Type   | Description                     |
+| -------- | ------ | ------------------------------- |
+| plan\_id | string | ID of the new subscription plan |
+
+
+
+
+```json
+
+
+
+{
+  "jsonrpc": "2.0",
+  "id": "unique-request-id",
+  "result": {
+    "status": "success",
+    "new_plan_id": "premium-monthly"
+  }
+}
+
+```
+
+### Response
+```json
+{
+  "jsonrpc": "2.0",
+  "id": "unique-request-id",
+  "result": {
+    "status": "success",
+    "new_plan_id": "premium-monthly"
+  }
+}
+```
+| Name          | Type   | Description                         |
+| ------------- | ------ | ----------------------------------- |
+| status        | string | "success" indicates update done     |
+| new\_plan\_id | string | ID of the updated subscription plan |
+
+
+## Subscriptions_Invoices
+
+
+Retrieve billing history for a subscription.
+
+
+```json
+
+
+
+
+{
+    "jsonrpc": "2.0",
+    "id": "bd2d3f49-e7e4-4151-85ff-1e7b8163cfe6",
+    "method": "Subscriptions_Invoices",
+    
+}
+```
+
+### Request
+
+Name | Type | Description
+--------- | ------- | -----------
+pair | string | The normalized symbol.
+exchanges | array of object | A list of cryptocurrency exchanges to use.
+volume | number | The amount of the Access Trading order.
+price | number | The price of the Access Trading order.
+interval | number | Interval in seconds
+start_time | timestamp | Start datetime of algo processing
+end_time | timestamp | End datetime of algo processing
+side | string | buy  or sell.
+
+
+
+```json
+
+
+{
+  "jsonrpc": "2.0",
+  "id": "unique-request-id",
+  "result": {
+    "invoices": [
+      {
+        "invoice_id": "inv_001",
+        "date": 000,
+        "amount": 000,
+        "currency": "INR",
+        "status": "paid",
+      },
+      {
+        "invoice_id": "inv_002",
+        "date": 1680518400,
+        "amount": 1999,
+        "currency": "INR",
+        "status": "paid",
+      }
+    ]
+  }
+}
+
+```
+
+### Response
+| Name                 | Type    | Description                              |
+| -------------------- | ------- | ---------------------------------------- |
+| invoices             | array   | List of invoice objects                  |
+| invoices.invoice\_id | string  | Unique invoice identifier                |
+| invoices.date        | integer | Invoice date as Unix timestamp (seconds) |
+| invoices.amount      | integer | Invoice amount in smallest currency unit |
+| invoices.currency    | string  | Currency code                            |
+| invoices.status      | string  | Invoice payment status (paid, due, etc.) |
+
+
+# Data Feeds (Prime)
+Accounts allow users to interact with all of the exchange accounts.
+
+
+
+## Latest_Aggregated_Data
+
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": "6c1985bf-80ad-4bbc-86d0-6e682cdb764d",
+    "method": "Latest_Aggregated_Data",
+    "params": {
+        "FeedId": "FeeId123",
+    }
+}
+```
+
+### Request
+
+| Name   | Type   | Description            |
+| ------ | ------ | ---------------------- |
+| feedId | string | Identifier of the feed |
+
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": "6c1985bf-80ad-4bbc-86d0-6e682cdb764d",
+    "result": {
+        "feed_id": "feed123",
+        "value": 123.45,
+        "timestamp": 1685373600
+      }
+             
+}
+```
+
+### Response
+
+| Name      | Type    | Description                        |
+| --------- | ------- | ---------------------------------- |
+| feed\_id  | string  | Feed identifier                    |
+| value     | number  | Latest value/price of the feed     |
+| timestamp | integer | Unix timestamp of the latest value |
+
+
+
+## specific_round
+
+Get data for a specific round of a feed.
+
+
+
+```json
+{
+  "id": "4feac4e0-3148-453c-ab40-3a487c7f0f94",
+  "jsonrpc": "2.0",
+  "method": "specific_round",
+  "period": "YTD"
+}
+
+```
+
+### Request
+
+| Name    | Type   | Description             |
+| ------- | ------ | ----------------------- |
+| feedId  | string | Identifier of the feed  |
+| roundId | string | Identifier of the round |
+
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": "4feac4e0-3148-453c-ab40-3a487c7f0f94",
+    "result": {
+        "feed_id": "feed123",
+        "round_id": "round456",
+        "value": 120.50,
+        "timestamp": 1685287200
+    }
+}
+
+```
+
+### Response
+
+| Name      | Type    | Description                       |
+| --------- | ------- | --------------------------------- |
+| feed\_id  | string  | Feed identifier                   |
+| round\_id | string  | Round identifier                  |
+| value     | number  | Value for the specified round     |
+| timestamp | integer | Unix timestamp of the round value |
+	
+
+## Historical_Time_Series
+Get historical time series data for a feed.
+
+```json
+{
+    "id": "c105f94b-1e72-47a4-9b22-0d5ea6551a72",
+    "jsonrpc": "2.0",
+    "method": "Historical_Time_Series",
+    "period": "MTD"
+}
+
+
+```
+
+### Request
+| Name   | Type   | Description            |
+| ------ | ------ | ---------------------- |
+| feedId | string | Identifier of the feed |
+### Query
+| Name  | Type    | Description                               |
+| ----- | ------- | ----------------------------------------- |
+| start | integer | Unix timestamp (seconds) for start date   |
+| end   | integer | Unix timestamp (seconds) for end date     |
+| limit | integer | Maximum number of data points to retrieve |
+
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": "c105f94b-1e72-47a4-9b22-0d5ea6551a72",
+    "result": [
+        {
+          "timestamp": 1685287200,
+          "value": 120.50
+        },
+        {
+          "timestamp": 1685373600,
+          "value": 123.45
+        }
+      ]
+            
+}
+```
+
+### Response
+| Name      | Type    | Description                      |
+| --------- | ------- | -------------------------------- |
+| timestamp | integer | Unix timestamp of the data point |
+| value     | number  | Value at the timestamp           |
+
+
+## Data_Sources
+
+
+```json
+{
+    "id": "84ce81bb-ce15-45a2-9fd1-fee002035c92",
+    "jsonrpc": "2.0",
+    "method": "Data_Sources",
+    "period": "DTD"
+}
+
+
+```
+
+### Request
+
+| Name   | Type   | Description            |
+| ------ | ------ | ---------------------- |
+| feedId | string | Identifier of the feed |
+
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": "84ce81bb-ce15-45a2-9fd1-fee002035c92",
+    "result": [
+        {
+          "source_id": "source1",
+          "name": "DataSource One",
+          "weight": 0.5
+        },
+        {
+          "source_id": "source2",
+          "name": "DataSource Two",
+          "weight": 0.5
+        }
+      ]
+    }
+  
+           
+            
+```
+
+### Response
+
+| Name       | Type   | Description                              |
+| ---------- | ------ | ---------------------------------------- |
+| source\_id | string | Unique identifier of the source          |
+| name       | string | Display name of the source               |
+| weight     | number | Weight/contribution in aggregation (0-1) |
+
+#Real-Time Streaming (Prime)
+##	WebSocket Stream
+
+Subscribe or unsubscribe to real-time data feeds over a WebSocket connection.
+
+
+
+```json
+{
+    "id": "908ee8b3-b4bc-4045-a9bd-c32e18d10049",
+    "jsonrpc": "2.0",
+    "method": "WebSocket Stream",
+
+
+```
+
+### Request
+Send a JSON-RPC message to subscribe or unsubscribe from one or more feeds.
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": "f1986b5d-a8b7-47a2-9333-e2f123dca9b6",
+    "result": "ok"
+        
+}
+
+```
+
+### Response
+
+| Name   | Type   | Description            |
+| ------ | ------ | ---------------------- |
+| result | string | "ok" indicates success |
+	
+
+## Streaming
+
+
+
+
+### Request
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": "342e98db-b700-41f5-8357-f20a581333ce",
+    "value": 123.45,
+    "timestamp": 1685373600  
+}
+
+
+```
+
+### Response
+| Name      | Type    | Description                 |
+| --------- | ------- | --------------------------- |
+| feedId    | string  | Identifier of the feed      |
+| value     | number  | Latest value from the feed  |
+| timestamp | integer | Unix timestamp of the value |
+
+
+
+
+
+
+
+#Jobs & Custom Pipelines (Prime Enterprise)
+
+## POST/v1/jobs
+
+This API is used to fetch token swap quotes for a given trading pair.
+
+
+
+```json
+{
+    "id": "cd728c5d-b8ca-40ee-a9cf-895a91cf2571",
+    "jsonrpc": "2.0",
+    "method": "POST/v1/jobs",
+    "params": {
+        "job_name": "Custom Price Feed",
+        "schedule": "0 0 * * *",
+        "parameters": {
+          "feedId": "feed123",
+          "filters": ["filter1", "filter2"]
+        }
+      }
+}
+```
+### Request
+
+| Name       | Type   | Description                        |
+| ---------- | ------ | ---------------------------------- |
+| job\_name  | string | Name of the job                    |
+| schedule   | string | Cron expression for job scheduling |
+| parameters | object | Job-specific parameters            |
+
+### Response
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": "cd728c5d-b8ca-40ee-a9cf-895a91cf2571",
+    "result": {
+        "job_id": "job_abc123",
+        "status": "created"
+      }
+}
+```
+| Name    | Type   | Description                     |
+| ------- | ------ | ------------------------------- |
+| job\_id | string | Unique identifier for the job   |
+| status  | string | Job creation status ("created") |
+
+
+## GET /v1/jobs/{jobId}
+Retrieve status and metadata of a job.
+
+### Request
+| Name  | Type   | Description           |
+| ----- | ------ | --------------------- |
+| jobId | string | Unique job identifier |
+
+```json{
+  "jsonrpc": "2.0",
+  "id": "unique-request-id",
+  "result": {
+    "job_id": "job_abc123",
+    "status": "deleted"
+  }
+}
+```
+###Response
+| Name    | Type   | Description                 |
+| ------- | ------ | --------------------------- |
+| job\_id | string | Unique job identifier       |
+| status  | string | Deletion status ("deleted") |
+
+##PATCH/v1/jobs/{jobId}
+
+Update schedule or parameters of an existing job.
+
+
+```json
+{
+    "id": "908ee8b3-b4bc-4045-a9bd-c32e18d10049",
+    "jsonrpc": "2.0",
+    "method": "PATCH/v1/jobs/{jobId}",
+    "params": {
+    "job_id": "job_abc123",
+    "schedule": "0 */6 * * *",
+    "parameters": {
+      "filters": ["filter3"]
+    }
+}
+
+```
+
+### Request
+| Name       | Type   | Description            |
+| ---------- | ------ | ---------------------- |
+| job\_id    | string | Unique job identifier  |
+| schedule   | string | New cron schedule      |
+| parameters | object | Updated job parameters |
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": "f1986b5d-a8b7-47a2-9333-e2f123dca9b6",
+    "result": {
+        "job_id": "job_abc123",
+        "status": "updated"
+      }
+        
+}
+
+```
+
+### Response
+
+| Name    | Type   | Description               |
+| ------- | ------ | ------------------------- |
+| job\_id | string | Unique job identifier     |
+| status  | string | Update status ("updated") |
+
+
+##	DELETE/v1/jobs/{jobId}
+   To delete a job
+
+```json
+{
+    "id": "908ee8b3-b4bc-4045-a9bd-c32e18d10049",
+    "jsonrpc": "2.0",
+    "method": "DELETE/v1/jobs/{jobId}",
+    
+}
+
+```
+
+### Request
+| Name  | Type   | Description           |
+| ----- | ------ | --------------------- |
+| jobId | string | Unique job identifier |
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": "f1986b5d-a8b7-47a2-9333-e2f123dca9b6",
+    "result": {
+        "job_id": "job_abc123",
+        "status": "deleted"
+      }
+        
+}
+
+```
+
+### Response
+
+| Name    | Type   | Description                 |
+| ------- | ------ | --------------------------- |
+| job\_id | string | Unique job identifier       |
+| status  | string | Deletion status ("deleted") |
+
+
+#Webhooks & Notifications (Prime)
+##	Webhooks
+List all registered webhooks.
+
+
+
+### Request
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": "f1986b5d-a8b7-47a2-9333-e2f123dca9b6",
+    "result": [
+        {
+          "id": "wh_12345",
+          "url": "https://example.com/callback",
+          "events": ["feed_update", "job_complete"],
+          "created_at": 1685373600
+        },
+        {
+          "id": "wh_67890",
+          "url": "https://example.org/notify",
+          "events": ["subscription_change"],
+          "created_at": 1685374000
+        }
+      ]
+        
+}
+
+```
+
+### Response
+| Name        | Type    | Description                    |
+| ----------- | ------- | ------------------------------ |
+| id          | string  | Unique webhook identifier      |
+| url         | string  | Registered callback URL        |
+| events      | array   | List of subscribed event types |
+| created\_at | integer | Unix timestamp of registration |
+
+##Register_Webhooks
+Register a new webhook callback URL with event subscriptions.
+
+
+```json
+{
+    "id": "908ee8b3-b4bc-4045-a9bd-c32e18d10049",
+    "jsonrpc": "2.0",
+    "method": "Register_Webhooks",
+    
+    
+}
+
+```
+### Request
+| Name   | Type   | Description                      |
+| ------ | ------ | -------------------------------- |
+| url    | string | Callback URL to receive events   |
+| events | array  | List of event names to subscribe |
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": "f1986b5d-a8b7-47a2-9333-e2f123dca9b6",
+    "result": {
+        "id": "wh_12345",
+        "url": "https://example.com/callback",
+        "events": ["feed_update", "job_complete"],
+        "created_at": 1685373600
+      }
+        
+}
+
+```
+
+### Response
+
+
+##Delete_Webhooks
+
+Remove a registered webhook.
+
+```json
+{
+    "id": "908ee8b3-b4bc-4045-a9bd-c32e18d10049",
+    "jsonrpc": "2.0",
+    "method": "Delete_Webhooks",
+    
+    
+}
+
+```
+
+### Request
+| Name | Type   | Description               |
+| ---- | ------ | ------------------------- |
+| id   | string | Unique webhook identifier |
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": "f1986b5d-a8b7-47a2-9333-e2f123dca9b6",
+    "result": {
+        "id": "wh_12345",
+        "status": "deleted"
+      }
+        
+}
+
+```
+
+### Response
+| Name        | Type    | Description                    |
+| ----------- | ------- | ------------------------------ |
+| id          | string  | Unique webhook identifier      |
+| url         | string  | Registered callback URL        |
+| events      | array   | List of subscribed event types |
+| created\_at | integer | Unix timestamp of registration |
+
+
+## Verifiable Randomness (VRF)
+
+### Request Randomness
+
+```http
+POST /v1/vrf/requests
+```
+
+Request:
+
+```json
+{
+    "consumerId": "my-app",
+    "numWords": 1,
+    "confirmationCount": 3,
+    "callbackUrl": "https://my-app.com/vrf-callback"
+}
+```
+
+Response:
+
+```json
+{
+    "requestId": "vrf_123",
+    "status": "pending",
+    "requestedAt": "2024-03-19T16:00:00Z"
+}
+```
+
+### Check Request Status
+
+```http
+GET /v1/vrf/requests/{requestId}
+```
+
+Response:
+
+```json
+{
+    "requestId": "vrf_123",
+    "status": "fulfilled",
+    "randomWords": ["0x1234..."],
+    "proof": "0x5678...",
+    "fulfilledAt": "2024-03-19T16:01:00Z"
+}
+```
+
+#Governance & Token (Sovereign Only)
+
+##List Proposals
+
+List all governance proposals.
+
+
+
+### Request
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": "f1986b5d-a8b7-47a2-9333-e2f123dca9b6",
+    "result":[
+      {
+        "id": "proposal_12345",
+        "title": "Proposal for Token Burn",
+        "status": "active",
+        "created_at": 1685373600,
+        "voting_start": 1685377200,
+        "voting_end": 1685463600
+      },
+      {
+        "id": "proposal_67890",
+        "title": "Proposal for Staking Reward Adjustment",
+        "status": "inactive",
+        "created_at": 1685287200,
+        "voting_start": 1685373600,
+        "voting_end": 1685450000
+      }
+    ]
+        
+}
+
+```
+
+### Response
+
+| Name          | Type    | Description                                                 |
+| ------------- | ------- | ----------------------------------------------------------- |
+| id            | string  | Unique proposal identifier                                  |
+| title         | string  | Title or description of the proposal                        |
+| status        | string  | Current status of the proposal (e.g., "active", "inactive") |
+| created\_at   | integer | Unix timestamp of proposal creation                         |
+| voting\_start | integer | Unix timestamp of voting start                              |
+| voting\_end   | integer | Unix timestamp of voting end                                |
+
+
+##Create Proposals
+
+Create governance proposals.
+
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": "unique-request-id",
+  "method": "create_proposal",
+  "params": {
+    "title": "Proposal for New Tokenomics",
+    "description": "Proposal to change the tokenomics to increase staking rewards.",
+    "signed_tx": "0xabc123..."  // Signed transaction for proposal creation
+  }
+}
+```
+
+### Request
+
+| Name        | Type   | Description                              |
+| ----------- | ------ | ---------------------------------------- |
+| title       | string | Title of the proposal                    |
+| description | string | Detailed description of the proposal     |
+| signed\_tx  | string | Signed transaction for proposal creation |
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": "f1986b5d-a8b7-47a2-9333-e2f123dca9b6",
+    "result":{
+      "id": "proposal_12345",
+      "status": "created"
+    }
+        
+}
+
+```
+
+### Response
+
+| Name   | Type   | Description                          |
+| ------ | ------ | ------------------------------------ |
+| id     | string | Unique proposal identifier           |
+| status | string | Proposal creation status ("created") |
+
+
+##Voting
+
+Cast a vote on a specific governance proposal.
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": "unique-request-id",
+  "method": "Voting",
+  "params": {
+    "proposal_id": "proposal_12345",
+    "vote": "yes"  // Can be "yes", "no", or "abstain"
+  }
+}
+```
+
+### Request
+
+| Name | Type   | Description                |
+| ---- | ------ | -------------------------- |
+| id   | string | Unique proposal identifier |
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": "f1986b5d-a8b7-47a2-9333-e2f123dca9b6",
+    "result": {
+      "status": "voted",
+      "vote": "yes"
+    }
+        
+}
+
+```
+
+### Response
+| Name   | Type   | Description                        |
+| ------ | ------ | ---------------------------------- |
+| status | string | Vote submission status ("voted")   |
+| vote   | string | Your vote ("yes", "no", "abstain") |
+
+
+
+##Stake
+Retrieve the current stake, rewards, and unbonding information.
+
+
+### Request
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": "f1986b5d-a8b7-47a2-9333-e2f123dca9b6",
+    "result": {
+      "stake": 10000,
+      "rewards": 250,
+      "unbonding": 500,
+      "last_claimed": 1685373600
+    }
+        
+}
+
+```
+
+### Response
+| Name          | Type    | Description                             |
+| ------------- | ------- | --------------------------------------- |
+| stake         | number  | Current amount of staked tokens         |
+| rewards       | number  | Total accumulated rewards               |
+| unbonding     | number  | Amount currently unbonding              |
+| last\_claimed | integer | Unix timestamp of the last reward claim |
+
+
+#Network & Validator Info (Sovereign Only)
+##Status
+
+
+
+### Request
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": "f1986b5d-a8b7-47a2-9333-e2f123dca9b6",
+    "result": {
+      "block_height": 1023456,
+      "finality": 100,
+      "active_validators": 56
+    }
+        
+}
+
+```
+
+### Response
+| Name               | Type    | Description                                    |
+| ------------------ | ------- | ---------------------------------------------- |
+| block\_height      | integer | Current block height of the network            |
+| finality           | integer | The finality level (e.g., number of blocks)    |
+| active\_validators | integer | The number of active validators in the network |
+
+
+##Validators
+
+### Request
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": "f1986b5d-a8b7-47a2-9333-e2f123dca9b6",
+    "result":[
+      {
+        "validator_address": "validator_abc123",
+        "status": "active",
+        "uptime": 99.99
+      },
+      {
+        "validator_address": "validator_xyz456",
+        "status": "inactive",
+        "uptime": 92.50
+      }
+    ]
+        
+}
+
+```
+
+### Response
+| Name               | Type   | Description                                            |
+| ------------------ | ------ | ------------------------------------------------------ |
+| validator\_address | string | Unique identifier for the validator                    |
+| status             | string | Current status of the validator ("active", "inactive") |
+| uptime             | number | Uptime percentage of the validator                     |
+
+
+##Metrics
+Retrieve the performance metrics of a specific validator, including uptime, commission, and performance.
+
+
+
+```
+
+### Request
+| Name          | Type   | Description              |
+| ------------- | ------ | ------------------------ |
+| validatorAddr | string | Unique validator address |
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": "f1986b5d-a8b7-47a2-9333-e2f123dca9b6",
+    "result":  {
+      "validator_address": "validator_abc123",
+      "uptime": 99.99,
+      "commission": 5.0,
+      "performance": 120.45
+    }
+        
+}
+
+```
+
+### Response
+| Name               | Type   | Description                              |
+| ------------------ | ------ | ---------------------------------------- |
+| validator\_address | string | Unique identifier for the validator      |
+| uptime             | number | Uptime percentage of the validator       |
+| commission         | number | Commission rate set by the validator (%) |
+| performance        | number | Performance score of the validator       |
+
+#Audit Logs & Usage (Prime + Sovereign)
+##Logs
+
+Retrieve audit logs with query parameters for start and end time.
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": "unique-request-id",
+  "method": "Logs",
+  "params": {
+    "start": 1685294400,
+    "end": 1685373600
+  }
+}
+```
+
+### Request
+| Name  | Type    | Description                                 |
+| ----- | ------- | ------------------------------------------- |
+| start | integer | Unix timestamp (seconds) for the start time |
+| end   | integer | Unix timestamp (seconds) for the end time   |
+
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": "f1986b5d-a8b7-47a2-9333-e2f123dca9b6",
+    "result": [
+      {
+        "log_id": "log_12345",
+        "timestamp": 1685300000,
+        "action": "API call",
+        "user_id": "user_6789",
+        "details": "Accessed feed data"
+      },
+      {
+        "log_id": "log_67890",
+        "timestamp": 1685360000,
+        "action": "API call",
+        "user_id": "user_2345",
+        "details": "Created new subscription"
+      }
+    ]
+        
+}
+
+```
+
+### Response
+| Name      | Type    | Description                              |
+| --------- | ------- | ---------------------------------------- |
+| log\_id   | string  | Unique identifier for the log entry      |
+| timestamp | integer | Unix timestamp of the log entry          |
+| action    | string  | Action taken (e.g., "API call", "login") |
+| user\_id  | string  | User who performed the action            |
+| details   | string  | Additional details about the action      |
+
+##Usage
+
+Retrieve API call breakdown by endpoint.
+
+
+### Request
+
+
+```json
+{
+    "jsonrpc": "2.0",
+    "id": "f1986b5d-a8b7-47a2-9333-e2f123dca9b6",
+    "result": {
+      "/v1/feeds/{feedId}/latest": 120,
+      "/v1/governance/proposals": 50,
+      "/v1/webhooks": 75
+    }
+        
+}
+
+```
+
+### Response
+| Name     | Type    | Description                             |
+| -------- | ------- | --------------------------------------- |
+| endpoint | string  | API endpoint being tracked              |
+| count    | integer | Number of times the endpoint was called |
+
+
+## Error Handling
+
+All errors follow this format:
+
+```json
+{
+    "code": "INVALID_REQUEST",
+    "message": "Invalid request parameters",
+    "details": {
+        "field": "amount",
+        "reason": "must be positive"
+    }
+}
+```
+
+Common error codes:
+- 400: Bad Request
+- 401: Unauthorized
+- 403: Forbidden
+- 404: Not Found
+- 429: Too Many Requests
+- 500: Internal Server Error
